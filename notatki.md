@@ -63,3 +63,31 @@ npx create-nx-workspace sages-angular-adv-listopad
   https://www.youtube.com/watch?v=2mYLe9Kp9VM&list=PLakNactNC1dH38AfqmwabvOszDmKriGco
 
 
+
+# Generate UI lib
+ng g @nrwl/angular:lib ui
+
+# Add a component
+ng g @nrwl/angular:component xyz --project ui
+
+## Nx Graph
+nx dep-graph
+
+## UI Toolkits
+https://material.angular.io/guide/getting-started
+https://ng.ant.design/docs/introduce/en
+https://www.primefaces.org/primeng/setup
+
+
+
+## Angular Material
+https://material.angular.io/guide/getting-started
+
+ng add @angular/material
+
+The package @angular/material@12.2.13 will be installed and executed.
+Would you like to proceed? Yes
+✔ Package successfully installed.
+? Choose a prebuilt theme name, or "custom" for a custom theme: Indigo/Pink        [ Preview: https://material.angular.io?theme=indigo-pink ]
+? Set up global Angular Material typography styles? Yes 
+? Set up browser animations for Angular Material? Yes
