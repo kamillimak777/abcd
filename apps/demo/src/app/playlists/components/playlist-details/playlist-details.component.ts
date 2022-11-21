@@ -3,13 +3,17 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-playlist-details',
   templateUrl: './playlist-details.component.html',
-  styleUrls: ['./playlist-details.component.css']
+  styleUrls: ['./playlist-details.component.css'],
 })
 export class PlaylistDetailsComponent implements OnInit {
+  playlist = {
+    id: '123',
+    name: 'Playlist 123',
+    public: true,
+    description: 'Awesome Playlist',
+  };
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
