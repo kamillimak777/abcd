@@ -16,4 +16,8 @@ export class PlaylistEditorComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  $input(event: Event) {
+    return <InputEvent & { target: HTMLInputElement }>event;
+  }
 }

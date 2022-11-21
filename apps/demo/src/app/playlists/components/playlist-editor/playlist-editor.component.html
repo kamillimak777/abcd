@@ -4,7 +4,11 @@
         <label for="">Name</label>
     </div>
     <div class="col">
-        <input type="text" [value]="playlist.name">
+        <input type="text" 
+            [value]="playlist.name"
+            (input)="playlist.name = $any($event).target.value  "
+            (input)="playlist.name = $input($event).target.value  ">
+        <span>0 / 100</span>
     </div>
 </div>
 
