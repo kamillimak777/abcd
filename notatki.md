@@ -4,12 +4,21 @@ git clone https://bitbucket.org/ev45ive/sages-angular-adv-listopad.git sages-ang
 cd sages-angular-adv-listopad
 npm i 
 npm run ng serve 
+<!-- lub -->
 npm run ng serve --project=demo
-
 ## Git Update
 git stash -u 
 git pull -f 
 
+## NVM
+https://github.com/coreybutler/nvm-windows
+https://github.com/coreybutler/nvm-windows/releases
+
+## VsCode Extensions
+
+https://marketplace.visualstudio.com/items?itemName=Angular.ng-template
+https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console
+https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 ## Instalacje
 node -v
 v18.12.0
