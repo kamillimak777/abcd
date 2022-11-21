@@ -4,8 +4,11 @@
         <app-playlist-list></app-playlist-list>
     </div>
     <div class="col">
+        <button mat-raised-button color="warn">Cancel</button>
+        <button mat-raised-button color="primary">Edit</button>
+
         <app-playlist-details></app-playlist-details>
         
-        <app-playlist-editor></app-playlist-editor>
+        <app-playlist-editor [hidden]="true"></app-playlist-editor>
     </div>
 </div>
