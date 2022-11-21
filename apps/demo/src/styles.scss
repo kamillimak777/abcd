@@ -12,6 +12,7 @@ body {
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 .row {
+  width: calc(100% - 4rem);
   display: flex;
   gap: 2rem;
   padding: 2rem;
