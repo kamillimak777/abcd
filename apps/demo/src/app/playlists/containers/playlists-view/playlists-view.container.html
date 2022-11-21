@@ -19,6 +19,18 @@
       [ngIfElse]="editorTplRef"
     ></ng-template>
 
+    <!-- <ng-template [ngIf]="mode === 'details'"> -->
+    <div
+      data-placki
+      *ngIf="mode === 'details'; 
+            then detailsTplRef ; 
+            else editorTplRef"
+    ></div>
+    <!-- </ng-template> -->
+
+
+    <!-- <div *product="costsm where {price:100} orderBy 'price'"></div> -->
+
     <!-- <ng-template [ngIf]="condFn()" [ngIfThen]="getTpl()"></ng-template> -->
 
     <!-- <ng-template [ngTemplateOutlet]="getTplSomehow()"></ng-tempalte> -->
