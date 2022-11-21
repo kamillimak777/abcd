@@ -3,7 +3,7 @@
     [id]="'playlist-'+playlist.id"
     [attr.data-playlist-id]="playlist.id">
     <!--  -->
-    
+
     <mat-list-item>
         <div matLine>Name:</div>
         <div [style.font-size.px]=" 20+2 "> {{playlist.name}}</div>
@@ -12,9 +12,34 @@
 
     <mat-list-item>
         <div matLine>Public</div>
-        <div [style.color]=" playlist.public? 'red' : 'green' "> 
+        
+        <!-- <div [style.color]=" playlist.public? 'red' : 'green' ">  -->
+        
+        <!-- <div [ngStyle]=" {
+            'color': playlist.public? 'red' : 'green',
+            'border-bottom': '1px solid currentColor'
+        } ">  -->
+        
+        <!-- <div style="border-bottom:1px solid currentColor" [ngStyle]=" {
+            'color': playlist.public? 'red' : 'green'            
+        } "> -->
+
+        <!-- <div [class]="playlist.public? 'red' : 'green' ">  -->
+
+        <!-- <div class="placki"
+             [class.isPublic]="playlist.public "
+             [class.isPrivate]="playlist.public === false"> 
+            {{ playlist.public? 'Yes':'No' }} 
+        </div> -->
+
+        <div class="placki"
+             [ngClass]="{
+                isPublic: playlist.public,
+                isPrivate: !playlist.public
+             }">
             {{ playlist.public? 'Yes':'No' }} 
         </div>
+
         <mat-divider></mat-divider>
     </mat-list-item>
 

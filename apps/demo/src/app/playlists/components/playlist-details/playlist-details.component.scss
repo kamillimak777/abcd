@@ -1,0 +1,24 @@
+$public: red;
+$private: green;
+
+.isPublic {
+  color: $public;
+}
+.isPrivate {
+  color: $private;
+}
+
+.isPrivate,
+.isPublic {
+  border-bottom: 1px solid currentColor;
+}
+
+/* HACKS */
+
+// ::ng-deep p {
+//   color: red;
+// }
+
+// :host ::ng-deep p {
+//   color: red;
+// }
