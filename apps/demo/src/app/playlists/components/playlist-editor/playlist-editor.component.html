@@ -4,14 +4,14 @@
         <label for="">Name</label>
     </div>
     <div class="col">
-        <input type="text" value="test">
+        <input type="text" [value]="playlist.name">
     </div>
 </div>
 
 <div class="row">
     <div class="col">
-        <label for=""> <input type="checkbox" > Public</label> 
-        
+        <label for=""> 
+            <input type="checkbox"  [checked]="playlist.public" > Public</label>         
     </div>
 </div>
 
@@ -20,6 +20,6 @@
         <label for="">Description</label>
     </div>
     <div class="col">
-        <textarea cols="30" rows="10" ></textarea>
+        <textarea cols="30" rows="10"  [value]="playlist.description" ></textarea>
     </div>
 </div>
