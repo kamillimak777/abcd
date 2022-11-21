@@ -110,3 +110,10 @@ npx nx generate @schematics/angular:component playlists/components/playlist-list
 npx nx generate @schematics/angular:component playlists/components/playlist-details 
 npx nx generate @schematics/angular:component playlists/components/playlist-editor 
 
+## Shared module
+
+npx nx generate @schematics/angular:module shared --module=app
+npx nx generate @schematics/angular:component shared/components/clock --export 
+
+
+

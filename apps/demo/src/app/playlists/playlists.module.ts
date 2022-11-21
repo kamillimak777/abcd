@@ -6,6 +6,7 @@ import { PlaylistsViewContainer } from './containers/playlists-view/playlists-vi
 import { PlaylistListComponent } from './components/playlist-list/playlist-list.component';
 import { PlaylistDetailsComponent } from './components/playlist-details/playlist-details.component';
 import { PlaylistEditorComponent } from './components/playlist-editor/playlist-editor.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
     PlaylistDetailsComponent,
     PlaylistEditorComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule, 
+    RouterModule.forChild(routes), 
+    SharedModule
+  ],
 })
 export class PlaylistsModule {}
