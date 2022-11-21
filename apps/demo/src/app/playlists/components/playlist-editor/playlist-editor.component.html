@@ -1,6 +1,6 @@
 <pre>{{ playlist | json }}</pre>
-
-<form>
+ 
+<form #formRef="ngForm" (ngSubmit)="submit()">
   <mat-form-field appearance="standard" class="row">
     <mat-label>Name</mat-label>
     <input
@@ -10,9 +10,12 @@
       [(ngModel)]="playlist.name"
       name="name"
       #ref
+      #nameModelRef="ngModel"
     />
-    <mat-error [hidden]="ref.value">Field is required</mat-error>
-    <mat-hint align="end">{{ playlist.name.length }} / 100</mat-hint>
+    <mat-error [hidden]="!nameModelRef.hasError('required')"
+      >Field is required</mat-error
+    >
+    <mat-hint align="end">{{ nameModelRef.value?.length }} / 100</mat-hint>
   </mat-form-field>
 
   <mat-checkbox class="row" [(ngModel)]="playlist.public" name="public">
@@ -27,6 +30,8 @@
       name="description"
     ></textarea>
   </mat-form-field>
+
+  <button mat-raised-button type="submit">Submit</button>
 </form>
 
 <!-- 
