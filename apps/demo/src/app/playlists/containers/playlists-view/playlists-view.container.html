@@ -11,8 +11,19 @@
     </button>
     {{mode}}
 
-    <app-playlist-details [hidden]="mode !== 'details'"></app-playlist-details>
 
-    <app-playlist-editor [hidden]="mode !== 'editor'"></app-playlist-editor>
+    <!-- <div ngIf>Nie jestem template!</div> -->
+
+    <ng-template [ngIf]="mode === 'details'">
+        <app-playlist-details></app-playlist-details>
+    </ng-template>
+    
+    <ng-template [ngIf]="mode === 'editor'">
+        <app-playlist-editor></app-playlist-editor>
+    </ng-template>
+    
+    <!-- comment == ViewContainerRef -->
+    <ng-container></ng-container>
+
   </div>
 </div>
