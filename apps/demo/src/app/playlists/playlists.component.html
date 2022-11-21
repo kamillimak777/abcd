@@ -1,1 +1,26 @@
-<router-outlet></router-outlet>
+<app-navigation>
+
+    <ng-container ngProjectAs="sidebar">
+        <mat-nav-list>
+            <a mat-list-item href="#">Link 1</a>
+            <a mat-list-item href="#">Link 2</a>
+            <a mat-list-item href="#">Link 3</a>
+        </mat-nav-list>
+    </ng-container>
+
+    <ng-container ngProjectAs="toolbar">
+        <div class="row">
+            <div class="col">
+                <h1 class="mat-h3">Playlists</h1>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+                <app-clock></app-clock>   
+            </div>
+        </div>
+    </ng-container>
+    
+
+    <router-outlet></router-outlet>
+
+</app-navigation>
