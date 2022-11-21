@@ -11,12 +11,11 @@
     </button>
     {{mode}}
 
-    <ng-container ngSwitch="mode">
-      <app-playlist-details ngSwitchCase="details"></app-playlist-details>
+    <ng-container [ngSwitch]="mode">
+      <app-playlist-details *ngSwitchDefault></app-playlist-details>
 
-      <app-playlist-editor ngSwitchCase="editor"></app-playlist-editor>
+      <app-playlist-editor *ngSwitchCase=" 'editor' "></app-playlist-editor>
     </ng-container>
-    
   </div>
 </div>
 <!-- <div ngIf>Nie jestem template!</div> -->
