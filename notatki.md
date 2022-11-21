@@ -116,4 +116,9 @@ npx nx generate @schematics/angular:module shared --module=app
 npx nx generate @schematics/angular:component shared/components/clock --export 
 
 
+## Angular Devtools
+
+https://angular.io/guide/devtools
+https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh
+https://addons.mozilla.org/en-GB/firefox/addon/angular-devtools/
 
