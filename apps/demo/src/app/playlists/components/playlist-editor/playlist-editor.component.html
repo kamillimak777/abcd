@@ -1,21 +1,55 @@
 
+<pre>{{playlist | json}}</pre>
+
+
+<mat-form-field appearance="standard" class="row">
+
+    <input type="text"
+     required="true"
+     matInput     
+    [(ngModel)]="playlist.name" 
+    #ref >
+
+    <mat-label>Name</mat-label>
+
+    <mat-error [hidden]="ref.value">Field is required</mat-error>
+
+    <mat-hint align="end">{{playlist.name.length}} / 100</mat-hint>
+
+</mat-form-field>
+
+<mat-checkbox class="row" [(ngModel)]="playlist.public">Public</mat-checkbox>
+
+<mat-form-field appearance="standard" class="row">
+    <mat-label>Description</mat-label>
+    <textarea matInput 
+    [(ngModel)]="playlist.description"></textarea>
+</mat-form-field>
+
+<!-- 
+[ngModel]="playlist.name"
+(ngModelChange)=" playlist.name = $event" -->
+
+<!-- 
+[Abc]="playlist.name"
+(AbcChange)=" playlist.name = $event" 
+
+[(Abc)]="$event"
+-->
+
+<!-- 
 <div class="row">
     <div class="col">
         <label for="">Name</label>
     </div>
     <div class="col">
-        <!-- <input type="text" 
-            [value]="playlist.name"
-            (input)="playlist.name = $any($event).target.value  "
-            (input)="playlist.name = $input($event).target.value  "> -->
 
-        <input type="text" 
-            [value]="playlist.name"  
-            #nameInputRef>
+        <input type="text"   
+        [value]="playlist.name"
+        (input)="playlist.name = $any($event).target.value  "
+        >
 
-        <span>{{nameInputRef.value.length}} / 100</span>
- 
-        <!-- <span>{{playlist.name.length}} / 100</span> -->
+        <span>{{playlist.name.length}} / 100</span>
     </div>
 </div>
 
@@ -33,4 +67,4 @@
     <div class="col">
         <textarea cols="30" rows="10"  [value]="playlist.description" ></textarea>
     </div>
-</div>
+</div> -->

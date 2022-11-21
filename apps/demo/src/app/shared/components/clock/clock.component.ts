@@ -19,7 +19,7 @@ export class ClockComponent implements OnInit {
     private zone: NgZone, // zone.js
     private cdr: ChangeDetectorRef
   ) {
-    // this.cdr.detach();
+    this.cdr.detach();
   }
 
   updateTime() {
@@ -27,7 +27,8 @@ export class ClockComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.cdr.detectChanges();
+    this.cdr.detectChanges();
+    // this.cdr.markForCheck();
 
     this.zone.runOutsideAngular(() => {
       setInterval(() => {

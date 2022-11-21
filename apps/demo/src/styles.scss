@@ -15,7 +15,9 @@ body {
   width: calc(100% - 4rem);
   display: flex;
   gap: 2rem;
-  padding: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .col {

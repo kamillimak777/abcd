@@ -10,9 +10,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [ClockComponent, NavigationComponent],
   imports: [
+    FormsModule,
     CommonModule,
     MatListModule,
     LayoutModule,
@@ -20,7 +26,20 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
   ],
-  exports: [ClockComponent, MatListModule, NavigationComponent],
+  exports: [
+    FormsModule,
+    ClockComponent,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    NavigationComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+  ],
 })
 export class SharedModule {}
