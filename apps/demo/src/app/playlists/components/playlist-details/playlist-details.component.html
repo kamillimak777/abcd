@@ -13,18 +13,19 @@
     <mat-list-item>
         <div matLine>Public</div>
         
-        <!-- <div [style.color]=" playlist.public? 'red' : 'green' ">  -->
+        <div [style.color]=" playlist.public? 'red' : 'green' "> </div>
         
-        <!-- <div [ngStyle]=" {
+        <div [ngStyle]=" {
             'color': playlist.public? 'red' : 'green',
             'border-bottom': '1px solid currentColor'
-        } ">  -->
+        } "></div> 
         
         <!-- <div style="border-bottom:1px solid currentColor" [ngStyle]=" {
             'color': playlist.public? 'red' : 'green'            
         } "> -->
 
-        <!-- <div [class]="playlist.public? 'red' : 'green' ">  -->
+        <div [class]="playlist.public? 'red' : 'green' "> </div>
+        <div ngClass [class]="playlist.public? 'red' : 'green' "> </div>
 
         <!-- <div class="placki"
              [class.isPublic]="playlist.public "
