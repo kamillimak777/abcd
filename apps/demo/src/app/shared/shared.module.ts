@@ -14,9 +14,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { ContenteditableDirective } from './directives/contenteditable.directive';
 
 @NgModule({
-  declarations: [ClockComponent, NavigationComponent],
+  declarations: [ClockComponent, NavigationComponent, ContenteditableDirective],
   imports: [
     FormsModule,
     CommonModule,
@@ -40,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    ContenteditableDirective,
   ],
 })
 export class SharedModule {}
