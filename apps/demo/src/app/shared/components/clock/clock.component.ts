@@ -33,6 +33,7 @@ export class ClockComponent implements OnInit {
       setInterval(() => {
         this.updateTime();
         this.cdr.detectChanges();
+        // this.cdr.markForCheck();
       }, 1_000);
     });
   }
