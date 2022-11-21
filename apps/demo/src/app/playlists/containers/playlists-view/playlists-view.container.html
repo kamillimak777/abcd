@@ -11,37 +11,42 @@
     </button>
     {{mode}}
 
-    <!-- <div ngIf>Nie jestem template!</div> -->
+    <ng-container ngSwitch="mode">
+      <app-playlist-details ngSwitchCase="details"></app-playlist-details>
 
-    <ng-template
-      [ngIf]="mode==='details'"
-      [ngIfThen]="detailsTplRef"
-      [ngIfElse]="editorTplRef"
-    ></ng-template>
-
-    <!-- <ng-template [ngIf]="mode === 'details'"> -->
-    <div
-      data-placki
-      *ngIf="mode === 'details'; 
-            then detailsTplRef ; 
-            else editorTplRef"
-    ></div>
-    <!-- </ng-template> -->
-
-
-    <!-- <div *product="costsm where {price:100} orderBy 'price'"></div> -->
-
-    <!-- <ng-template [ngIf]="condFn()" [ngIfThen]="getTpl()"></ng-template> -->
-
-    <!-- <ng-template [ngTemplateOutlet]="getTplSomehow()"></ng-tempalte> -->
+      <app-playlist-editor ngSwitchCase="editor"></app-playlist-editor>
+    </ng-container>
+    
   </div>
 </div>
+<!-- <div ngIf>Nie jestem template!</div> -->
+
+<!-- <ng-template
+  [ngIf]="mode==='details'"
+  [ngIfThen]="detailsTplRef"
+  [ngIfElse]="editorTplRef"
+></ng-template> -->
+
+<!-- <ng-template [ngIf]="mode === 'details'"> -->
+<!-- <div
+  data-placki
+  *ngIf="mode === 'details'; 
+        then detailsTplRef ; 
+        else editorTplRef"
+></div> -->
+<!-- </ng-template> -->
+
+<!-- <div *product="costsm where {price:100} orderBy 'price'"></div> -->
+
+<!-- <ng-template [ngIf]="condFn()" [ngIfThen]="getTpl()"></ng-template> -->
+
+<!-- <ng-template [ngTemplateOutlet]="getTplSomehow()"></ng-tempalte> -->
 
 <!-- @ViewChild('detailsTplRef') -->
-<ng-template #detailsTplRef>
+<!-- <ng-template #detailsTplRef>
   <app-playlist-details></app-playlist-details>
-</ng-template>
+</ng-template> -->
 
-<ng-template #editorTplRef>
+<!-- <ng-template #editorTplRef>
   <app-playlist-editor></app-playlist-editor>
-</ng-template>
+</ng-template> -->
