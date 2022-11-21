@@ -4,11 +4,16 @@
         <label for="">Name</label>
     </div>
     <div class="col">
-        <input type="text" 
+        <!-- <input type="text" 
             [value]="playlist.name"
             (input)="playlist.name = $any($event).target.value  "
-            (input)="playlist.name = $input($event).target.value  ">
-        <span>0 / 100</span>
+            (input)="playlist.name = $input($event).target.value  "> -->
+        <input type="text" 
+            [value]="playlist.name"
+            #nameInputRef>
+
+        <span>{{nameInputRef.value.length}} / 100</span>
+        <!-- <span>{{playlist.name.length}} / 100</span> -->
     </div>
 </div>
 
