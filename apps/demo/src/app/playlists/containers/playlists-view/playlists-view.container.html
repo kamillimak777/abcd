@@ -1,14 +1,18 @@
- 
 <div class="row">
-    <div class="col">
-        <app-playlist-list></app-playlist-list>
-    </div>
-    <div class="col">
-        <button mat-raised-button color="warn">Cancel</button>
-        <button mat-raised-button color="primary">Edit</button>
+  <div class="col">
+    <app-playlist-list></app-playlist-list>
+  </div>
+  <div class="col">
+    <button mat-raised-button color="warn" (click)="showDetails()">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" (click)="showEditor()">
+      Edit
+    </button>
+    {{mode}}
 
-        <app-playlist-details></app-playlist-details>
-        
-        <app-playlist-editor [hidden]="true"></app-playlist-editor>
-    </div>
+    <app-playlist-details [hidden]="mode !== 'details'"></app-playlist-details>
+
+    <app-playlist-editor [hidden]="mode !== 'editor'"></app-playlist-editor>
+  </div>
 </div>
