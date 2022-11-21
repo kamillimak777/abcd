@@ -9,10 +9,11 @@
             (input)="playlist.name = $any($event).target.value  "
             (input)="playlist.name = $input($event).target.value  "> -->
         <input type="text" 
-            [value]="playlist.name"
+            [value]="playlist.name" 
             #nameInputRef>
 
         <span>{{nameInputRef.value.length}} / 100</span>
+ 
         <!-- <span>{{playlist.name.length}} / 100</span> -->
     </div>
 </div>
@@ -20,7 +21,7 @@
 <div class="row">
     <div class="col">
         <label for=""> 
-            <input type="checkbox"  [checked]="playlist.public" > Public</label>         
+            <input type="checkbox"  [checked]="playlist.public" (click)="0" > Public</label>         
     </div>
 </div>
 
