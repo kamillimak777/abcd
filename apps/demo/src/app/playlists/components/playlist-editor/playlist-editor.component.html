@@ -8,8 +8,9 @@
             [value]="playlist.name"
             (input)="playlist.name = $any($event).target.value  "
             (input)="playlist.name = $input($event).target.value  "> -->
+
         <input type="text" 
-            [value]="playlist.name" 
+            [value]="playlist.name"  
             #nameInputRef>
 
         <span>{{nameInputRef.value.length}} / 100</span>

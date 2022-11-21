@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Sages ADV Angular';
+
+  costam(){
+    console.log('App:ChangeDetection')
+  }
 }
