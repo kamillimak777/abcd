@@ -3,10 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/playlists',
+    pathMatch: 'full',
+  },
+  {
+    path: 'playlists',
+    loadChildren: () =>
+      import('./playlists/playlists.module').then((m) => m.PlaylistsModule),
+  },
+];
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
