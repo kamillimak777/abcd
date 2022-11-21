@@ -6,6 +6,10 @@ npm i
 npm run ng serve 
 npm run ng serve --project=demo
 
+## Git Update
+git stash -u 
+git pull -f 
+
 ## Instalacje
 node -v
 v18.12.0
