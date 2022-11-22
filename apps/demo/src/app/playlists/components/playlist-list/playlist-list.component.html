@@ -1,15 +1,21 @@
 <!-- mat-list>mat-list-item*3>span.matLine{ $. Playlist $$$}+mat-divider -->
 <mat-list>
+    <!-- container NgFor -->
+  <ng-template
+  
+    ngFor
+    [ngForOf]="playlists"
+
+    let-playlist="$implicit"
+    let-i="index"
+  >
     <mat-list-item>
-        <span class="matLine"> 1. Playlist 001</span>
-        <mat-divider></mat-divider>
+      <span class="matLine"> {{ i + 1 }}. {{ playlist.name }}</span>
+      <mat-divider></mat-divider>
     </mat-list-item>
-    <mat-list-item>
-        <span class="matLine"> 2. Playlist 002</span>
-        <mat-divider></mat-divider>
-    </mat-list-item>
-    <mat-list-item>
-        <span class="matLine"> 3. Playlist 003</span>
-        <mat-divider></mat-divider>
-    </mat-list-item>
+  </ng-template>
 </mat-list>
+
+<!-- for( let playlist = $implicit   of playlsits){
+    for( let track = $implicit  of tracks){
+        $implicit  track playlist  -->
