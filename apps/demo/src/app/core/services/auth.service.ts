@@ -6,7 +6,6 @@ import { OAuthService } from 'angular-oauth2-oidc';
 })
 export class AuthService {
   constructor(private oauth: OAuthService) {
-    debugger;
     this.oauth.tryLogin();
   }
 

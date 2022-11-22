@@ -148,3 +148,12 @@ https://mswjs.io/
 
 ## Clean Architecture 
 https://medium.com/taager-tech-blog/clean-architecture-for-angular-applications-b7ab140f0d5a
+
+## RxJS Operators
+https://rxmarbles.com/#map 
+https://rxjs.dev/api/operators/map
+https://rxjs.dev/operator-decision-tree
+https://rxviz.com/examples/mouse-move
+https://www.learnrxjs.io/learn-rxjs/operators
+
+

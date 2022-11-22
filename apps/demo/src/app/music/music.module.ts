@@ -9,6 +9,8 @@ import { ResultsGridComponent } from './components/results-grid/results-grid.com
 import { AlbumCardComponent } from './components/album-card/album-card.component';
 import { SharedModule } from '../shared/shared.module';
 
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+
 const routes: Routes = [
   {
     path: '',
@@ -31,5 +33,11 @@ const routes: Routes = [
     AlbumCardComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule.forChild(routes)],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
+  ],
 })
 export class MusicModule {}
