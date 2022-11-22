@@ -25,6 +25,6 @@ export class AlbumSearchViewContainer {
   }
 
   ngOnInit() {
-    this.search('Batman');
+    // this.search('Batman');
   }
 }
