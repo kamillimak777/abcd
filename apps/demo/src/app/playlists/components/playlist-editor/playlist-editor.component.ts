@@ -6,6 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { Playlist } from '../playlist-list/Playlist';
 
 @Component({
   selector: 'app-playlist-editor',
@@ -14,7 +15,7 @@ import { NgForm, NgModel } from '@angular/forms';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaylistEditorComponent implements OnInit {
-  playlist = {
+  playlist: Playlist = {
     id: '123',
     name: 'Playlist 123',
     public: true,

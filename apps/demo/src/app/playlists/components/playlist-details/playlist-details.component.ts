@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Playlist } from '../playlist-list/Playlist';
 
 @Component({
   selector: 'app-playlist-details',
@@ -7,7 +8,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   // encapsulation: ViewEncapsulation.None
 })
 export class PlaylistDetailsComponent implements OnInit {
-  playlist = {
+  playlist:Playlist = {
     id: '123',
     name: 'Playlist 123',
     public: true,

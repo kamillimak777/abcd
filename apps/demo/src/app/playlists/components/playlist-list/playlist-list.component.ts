@@ -1,7 +1,6 @@
 import { NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-
-NgForOf;
+import { Playlist } from './Playlist';
 
 @Component({
   selector: 'app-playlist-list',
@@ -9,7 +8,7 @@ NgForOf;
   styleUrls: ['./playlist-list.component.css'],
 })
 export class PlaylistListComponent implements OnInit {
-  playlists = [
+  playlists: Playlist[] = [
     {
       id: '123',
       name: 'Playlist 123',
@@ -33,13 +32,13 @@ export class PlaylistListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.playlists.push(this.playlists.shift()!);
-      this.playlists = JSON.parse(JSON.stringify(this.playlists));
-    }, 1000);
+    // setInterval(() => {
+    //   this.playlists.push(this.playlists.shift()!);
+    //   this.playlists = JSON.parse(JSON.stringify(this.playlists));
+    // }, 1000);
   }
 
-  trackFn(index: number, item: any) {
+  trackFn(index: number, item: Playlist) {
     return item.id;
   }
 }
