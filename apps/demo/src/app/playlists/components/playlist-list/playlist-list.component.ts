@@ -1,5 +1,6 @@
 import { NgForOf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSelectionList } from '@angular/material/list';
 import { Playlist } from './Playlist';
 
 @Component({
@@ -29,7 +30,23 @@ export class PlaylistListComponent implements OnInit {
     },
   ];
 
+  selectedId = '234';
+
   constructor() {}
+
+  @ViewChild('selectionList')
+  selectionList?: MatSelectionList;
+
+  select([id]: Playlist['id'][]) {
+    this.selectedId = id;
+  }
+
+  ngAfterViewInit(): void {
+    // const option = this.selectionList?.options.find(
+    //   (option) => option.value == this.selectedId
+    // );
+    // if (option) this.selectionList?.selectedOptions.select(option);
+  }
 
   ngOnInit(): void {
     // setInterval(() => {

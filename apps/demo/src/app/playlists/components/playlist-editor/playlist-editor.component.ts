@@ -22,17 +22,10 @@ export class PlaylistEditorComponent implements OnInit {
     description: 'Awesome Playlist',
   };
 
-  // @ViewChild('ref',{read: ElementRef})
-  // @ViewChild('ref', { read: NgModel })
-  // modelRef?: NgModel;
-  // @ViewChild(NgForm)
   @ViewChild('formRef', { read: NgForm })
   formRef?: NgForm;
 
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-  }
+  ngAfterViewInit(): void {}
 
   submit() {
     if (this.formRef?.invalid) return;
@@ -43,12 +36,12 @@ export class PlaylistEditorComponent implements OnInit {
     //   public: false,
     //   description: '',
     // });
-    
+
     this.formRef?.resetForm({
       name: '',
       public: false,
       description: '',
-    })
+    });
   }
 
   constructor() {}
