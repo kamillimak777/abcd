@@ -21,7 +21,9 @@ export class AlbumSearchViewContainer {
 
   search(query = '') {
     this.store.searchAlbums(query).subscribe({
-      next: (res) => console.log(res),
+      next: (res) => {
+        this.results = res.albums.items;
+      },
       error: (error) => {
         this.message = error.error.error.message;
       },

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { albumsMock } from '../../mocks/albumsMock';
-import { AlbumResponse } from '../../model/Album';
+import { AlbumResponse, AlbumSearchResponse } from '../../model/Album';
 import { API_URL } from '../../tokens';
 import { AuthService } from '../auth.service';
 
@@ -17,7 +17,7 @@ export class MusicStoreService {
   ) {}
 
   searchAlbums(query: string) {
-    return this.http.get<AlbumResponse[]>(this.api_url + 'albums', {
+    return this.http.get<AlbumSearchResponse>(this.api_url + 'search', {
       params: { type: 'album', query },
       headers: {
         Authorization: 'Bearer ' + this.auth.getToken(),
