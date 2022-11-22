@@ -1,6 +1,6 @@
 <pre>{{ playlist | json }}</pre>
 
-<form #formRef="ngForm" (ngSubmit)="submit()">
+<form #formRef="ngForm" (ngSubmit)="submit()" *ngIf="playlist">
   <mat-form-field appearance="standard" class="row">
     <mat-label>Name</mat-label>
     <input

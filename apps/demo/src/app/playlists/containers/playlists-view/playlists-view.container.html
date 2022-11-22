@@ -2,17 +2,19 @@
   <div class="col">
     <app-playlist-list
       [items]="playlists"
-      [selectedId]="selected.id"
+      [selectedId]="selected?.id"
       (selectedIdChange)="selectPlaylistById($event)"
     ></app-playlist-list>
 
-    <app-playlist-list
-      [items]="playlists"
-      [(selectedId)]="selectedId"
-    ></app-playlist-list>
+    <button
+      mat-fab
+      (click)="showCreator()"
+      style="float: right; margin-top: 2rem"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
   <div class="col">
-
     <ng-container [ngSwitch]="mode">
       <app-playlist-details
         (edit)="showEditor()"
@@ -21,10 +23,16 @@
       ></app-playlist-details>
 
       <app-playlist-editor
-      (save)="savePlaylist($event)"
-      (cancel)="showDetails()"
+        (save)="savePlaylist($event)"
+        (cancel)="showDetails()"
         [playlist]="selected"
         *ngSwitchCase=" 'editor' "
+      ></app-playlist-editor>
+
+      <app-playlist-editor
+        (save)="createPlaylist($event)"
+        (cancel)="showDetails()"
+        *ngSwitchCase=" 'creator' "
       ></app-playlist-editor>
     </ng-container>
   </div>

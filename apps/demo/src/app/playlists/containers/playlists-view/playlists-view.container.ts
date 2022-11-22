@@ -27,18 +27,22 @@ const mockPlaylists = [
   styleUrls: ['./playlists-view.container.css'],
 })
 export class PlaylistsViewContainer implements OnInit {
-  mode: 'details' | 'editor' = 'details';
+  mode: 'details' | 'editor' | 'creator' = 'details';
 
   playlists: Playlist[] = mockPlaylists;
   selectedId: Playlist['id'] = '';
   // selected: Playlist | undefined = this.playlists[0];
-  selected: Playlist  = this.playlists[0];
+  selected?: Playlist; //  = this.playlists[0];
 
   constructor() {}
 
   selectPlaylistById(id: Playlist['id']) {
-    this.selectedId = id 
-    this.selected = this.playlists.find((p) => p.id === id)!
+    this.selectedId = id;
+    this.selected = this.playlists.find((p) => p.id === id)!;
+  }
+
+  showCreator() {
+    this.mode = 'creator';
   }
 
   showEditor() {
@@ -50,6 +54,10 @@ export class PlaylistsViewContainer implements OnInit {
   }
 
   savePlaylist(draft: Playlist) {
+    console.log('Saving...', draft);
+  }
+
+  createPlaylist(draft: Playlist) {
     console.log('Saving...', draft);
   }
 

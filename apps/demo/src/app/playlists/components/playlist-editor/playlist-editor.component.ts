@@ -18,11 +18,11 @@ import { Playlist } from '../playlist-list/Playlist';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaylistEditorComponent implements OnInit {
-  @Input() playlist: Playlist = {
-    id: '123',
-    name: 'Playlist 123',
-    public: true,
-    description: 'Awesome Playlist',
+  @Input() playlist?: Playlist = {
+    id: '',
+    name: '',
+    public: false,
+    description: '',
   };
 
   @Output() cancel = new EventEmitter();
