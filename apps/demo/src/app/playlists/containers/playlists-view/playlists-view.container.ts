@@ -16,25 +16,22 @@ export class PlaylistsViewContainer implements OnInit {
   constructor(private service: PlaylistsStoreService) {}
 
   ngOnInit(): void {
-    this.fetchPlaylists();
-  }
-
-  fetchPlaylists() {
-    this.service.findPlaylists().subscribe((data) => {
+    this.service.playlistsChange.subscribe((data) => {
       this.playlists = data;
+      // this.cdk.detectChangess()
     });
+
+    this.service.findPlaylists();
   }
 
   savePlaylist(draft: Playlist) {
     this.service.save(draft).subscribe(() => {
-      this.fetchPlaylists();
       this.selectPlaylistById(draft.id);
     });
   }
 
   createPlaylist(draft: Playlist) {
     this.service.create(draft).subscribe(() => {
-      this.fetchPlaylists();
       this.selectPlaylistById(draft.id);
     });
   }
