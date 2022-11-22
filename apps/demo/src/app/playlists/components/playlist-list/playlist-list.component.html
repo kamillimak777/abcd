@@ -8,9 +8,13 @@
 </a>
 </mat-nav-list> -->
 
-<mat-selection-list #selectionList [multiple]="false" color="accent"
-    [ngModel]="[selectedId]" (ngModelChange)="select($event)">
-
+<mat-selection-list
+  #selectionList
+  [multiple]="false"
+  color="accent"
+  [ngModel]="[selectedId]"
+  (ngModelChange)="select($event)"
+>
   <mat-list-option
     *ngFor="let playlist of playlists; index as i; trackBy: trackFn"
     [value]="playlist.id"

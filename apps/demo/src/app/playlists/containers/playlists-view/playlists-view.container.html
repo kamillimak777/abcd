@@ -2,16 +2,16 @@
   <div class="col">
     <app-playlist-list
       [items]="playlists"
-      (selectedIdChange)="selectPlaylistById($event) "
+      [selectedId]="selected.id"
+      (selectedIdChange)="selectPlaylistById($event)"
+    ></app-playlist-list>
+
+    <app-playlist-list
+      [items]="playlists"
+      [(selectedId)]="selectedId"
     ></app-playlist-list>
   </div>
   <div class="col">
-    <!-- <input
-      type="text"
-      [value]="selected.name"
-      (keyup)="selected.name = $any($event).target.value"
-    /> -->
-    <!-- (keyup)="selected = $any({name: $any($event).target.value})" -->
 
     <ng-container [ngSwitch]="mode">
       <app-playlist-details
@@ -29,6 +29,7 @@
     </ng-container>
   </div>
 </div>
+
 <!-- <div ngIf>Nie jestem template!</div> -->
 
 <!-- <ng-template

@@ -19,7 +19,7 @@ import { Playlist } from './Playlist';
 export class PlaylistListComponent implements OnInit {
   @Input('items') playlists: Playlist[] = [];
 
-  selectedId = '234';
+  @Input() selectedId = '';
 
   @Output() selectedIdChange = new EventEmitter<Playlist['id']>();
 
