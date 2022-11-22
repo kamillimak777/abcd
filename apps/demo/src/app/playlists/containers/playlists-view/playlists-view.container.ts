@@ -20,21 +20,18 @@ export class PlaylistsViewContainer implements OnInit {
   }
 
   savePlaylist(draft: Playlist) {
-    console.log('Saving...', draft);
     this.service.save(draft);
     this.selectPlaylistById(draft.id);
-    this.showDetails();
   }
 
   createPlaylist(draft: Playlist) {
-    console.log('Saving...', draft);
     this.service.create(draft);
     this.selectPlaylistById(draft.id);
-    this.showDetails();
   }
 
   selectPlaylistById(id: Playlist['id']) {
-    this.selected = this.playlists.find((p) => p.id === id)!;
+    this.selected = this.service.getPlaylistById(id);
+    this.showDetails();
   }
 
   showCreator() {
