@@ -143,3 +143,5 @@ npx nx generate @schematics/angular:interface core/models/album
 npx nx generate @schematics/angular:service core/services/music-store 
 
 
+## Mocking REST API in browser
+https://mswjs.io/
