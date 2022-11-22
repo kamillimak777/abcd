@@ -38,24 +38,19 @@ export class MusicStoreService {
       .pipe(
         map((res) => res.albums.items),
         retry({
-          // count: 3,
           delay(error, retryCount) {
+            // Retry (with Exponential Backoff) only if no connection
+            if (error.status !== 0) return throwError(() => error);
             return iif(
               () => retryCount < 3,
-              timer(retryCount ** 2 * 500),
+              timer(retryCount ** 2 * 1500),
               throwError(() => new Error('Timeout'))
             );
           },
+        }),
+        catchError((error, originalObs) => {
+          return throwError(() => new Error(error.error.error.message));
         })
-        // catchError((error, originalObs) => {
-        //   // return [] // -|
-        //   // return [albumsMock,albumsMock]; // -OO|
-        //   // return of(albumsMock); // -O|
-        //   // this.http.get('backup_server')...
-        //   // return EMPTY; // -|
-
-        //   return throwError(() => new Error(error.error.error.message));
-        // })
       );
   }
 }
