@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map, of } from 'rxjs';
+import { catchError, EMPTY, map, of, throwError } from 'rxjs';
 import { albumsMock } from '../../mocks/albumsMock';
 import { AlbumResponse, AlbumSearchResponse } from '../../model/Album';
 import { API_URL } from '../../tokens';
@@ -25,9 +25,16 @@ export class MusicStoreService {
         },
       })
       .pipe(
-        map(res => res.albums.items)
-      );
+        map((res) => res.albums.items),
+        catchError((error, originalObs) => {
+          // return [] // -|
+          // return [albumsMock,albumsMock]; // -OO|
+          // return of(albumsMock); // -O|
+          // this.http.get('backup_server')...
+          // return EMPTY; // -|
 
-    // return of(albumsMock);
+          return throwError(() => new Error(error.error.error.message));
+        })
+      );
   }
 }
