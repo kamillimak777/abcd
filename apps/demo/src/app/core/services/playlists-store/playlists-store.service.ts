@@ -22,10 +22,12 @@ export class PlaylistsStoreService {
   save(draft: Playlist) {
     const index = this.playlists.findIndex((p) => p.id == draft.id);
     this.playlists[index] = draft;
+    this.playlists = [...this.playlists]
   }
 
   create(draft: Playlist) {
     draft.id = (Date.now()).toString()
     this.playlists.push(draft);
+    this.playlists = [...this.playlists]
   }
 }

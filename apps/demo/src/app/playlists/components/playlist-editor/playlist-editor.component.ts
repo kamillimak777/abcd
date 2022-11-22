@@ -15,6 +15,7 @@ import { Playlist } from '../../../core/model/Playlist';
   selector: 'app-playlist-editor',
   templateUrl: './playlist-editor.component.html',
   styleUrls: ['./playlist-editor.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaylistEditorComponent implements OnInit {
