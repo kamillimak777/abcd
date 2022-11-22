@@ -1,3 +1,6 @@
 <div class="grid">
-  <app-album-card *ngFor="let result of [1, 2, 3, 4, 5]"></app-album-card>
+  <app-album-card
+    *ngFor="let result of results"
+    [album]="result"
+  ></app-album-card>
 </div>
