@@ -1,8 +1,21 @@
 <div class="row">
   <div class="col">
-    <app-playlist-list></app-playlist-list>
+    <app-playlist-list
+      [items]="playlists"
+      (selectedIdChange)="selectPlaylistById($event) "
+    ></app-playlist-list>
+
+    
   </div>
   <div class="col">
+    <input
+      type="text"
+      [value]="selected.name"
+      (keyup)="selected.name = $any($event).target.value"
+    />
+    <!-- (keyup)="selected = $any({name: $any($event).target.value})" -->
+    
+
     <button mat-raised-button color="warn" (click)="showDetails()">
       Cancel
     </button>
@@ -12,9 +25,10 @@
     {{mode}}
 
     <ng-container [ngSwitch]="mode">
-      <app-playlist-details *ngSwitchDefault></app-playlist-details>
+      
+      <app-playlist-details [playlist]="selected" *ngSwitchDefault></app-playlist-details>
 
-      <app-playlist-editor *ngSwitchCase=" 'editor' "></app-playlist-editor>
+      <app-playlist-editor [playlist]="selected" *ngSwitchCase=" 'editor' "></app-playlist-editor>
     </ng-container>
   </div>
 </div>

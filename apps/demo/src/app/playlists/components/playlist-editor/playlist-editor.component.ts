@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -15,7 +16,7 @@ import { Playlist } from '../playlist-list/Playlist';
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlaylistEditorComponent implements OnInit {
-  playlist: Playlist = {
+  @Input() playlist: Playlist = {
     id: '123',
     name: 'Playlist 123',
     public: true,

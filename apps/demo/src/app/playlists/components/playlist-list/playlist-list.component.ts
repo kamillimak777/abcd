@@ -1,5 +1,12 @@
 import { NgForOf } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatSelectionList } from '@angular/material/list';
 import { Playlist } from './Playlist';
 
@@ -7,30 +14,14 @@ import { Playlist } from './Playlist';
   selector: 'app-playlist-list',
   templateUrl: './playlist-list.component.html',
   styleUrls: ['./playlist-list.component.css'],
+  // inputs: ['playlists:items'],
 })
 export class PlaylistListComponent implements OnInit {
-  playlists: Playlist[] = [
-    {
-      id: '123',
-      name: 'Playlist 123',
-      public: true,
-      description: 'BEst Playlist',
-    },
-    {
-      id: '234',
-      name: 'Playlist 234',
-      public: false,
-      description: 'Awesome Playlist',
-    },
-    {
-      id: '345',
-      name: 'Playlist 345',
-      public: true,
-      description: 'Cool Playlist',
-    },
-  ];
+  @Input('items') playlists: Playlist[] = [];
 
   selectedId = '234';
+
+  @Output() selectedIdChange = new EventEmitter<Playlist['id']>();
 
   constructor() {}
 
@@ -39,6 +30,7 @@ export class PlaylistListComponent implements OnInit {
 
   select([id]: Playlist['id'][]) {
     this.selectedId = id;
+    this.selectedIdChange.emit(id)
   }
 
   ngAfterViewInit(): void {

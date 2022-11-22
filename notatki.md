@@ -24,6 +24,7 @@ https://github.com/coreybutler/nvm-windows/releases
 https://marketplace.visualstudio.com/items?itemName=Angular.ng-template
 https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console
 https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+https://marketplace.visualstudio.com/items?itemName=Mikael.Angular-BeastCode
 
 ## Instalacje
 
