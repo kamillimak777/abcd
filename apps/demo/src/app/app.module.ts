@@ -8,6 +8,10 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { INITIAL_PLAYLISTS_DATA } from './core/tokens';
 import { mockPlaylists } from './core/mocks/playlistsMocks';
+import { HttpClientModule } from '@angular/common/http';
+
+import { OAuthModule } from 'angular-oauth2-oidc';
+
 const routes: Routes = [
   {
     path: '',
@@ -20,18 +24,28 @@ const routes: Routes = [
       import('./playlists/playlists.module') //
         .then((m) => m.PlaylistsModule),
   },
-  { path: 'music', loadChildren: () => import('./music/music.module').then(m => m.MusicModule) },
+  {
+    path: 'music',
+    loadChildren: () =>
+      import('./music/music.module').then((m) => m.MusicModule),
+  },
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    CoreModule,
+    // Infrastructure
+    OAuthModule.forRoot(),
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes, {
-      useHash: true,
-    }),
+    //// App Core
+    CoreModule,
+    
+      // Features
+      RouterModule.forRoot(routes, { useHash: true }),
+
+    // UI and Helpers
     SharedModule,
     // environment.production ? [] : [MockModule],
   ],

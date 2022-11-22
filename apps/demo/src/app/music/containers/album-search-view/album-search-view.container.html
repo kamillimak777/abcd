@@ -1,10 +1,11 @@
 <div class="row">
-    <div class="col">
-        <app-search-form (search)="search($event)"></app-search-form>
-    </div>
+  <div class="col">
+    <app-search-form (search)="search($event)"></app-search-form>
+  </div>
 </div>
 <div class="row">
-    <div class="col">
-        <app-results-grid [results]="results"></app-results-grid>
-    </div>
+  <div class="col">
+    <p *ngIf="message " style="color: red">{{message}}</p>
+    <app-results-grid [results]="results"></app-results-grid>
+  </div>
 </div>

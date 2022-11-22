@@ -15,28 +15,21 @@ import { MusicStoreService } from '../../../core/services/music-store/music-stor
 })
 export class AlbumSearchViewContainer {
   results: Album[] = [];
+  message = '';
 
   constructor(private store: MusicStoreService) {}
 
   search(query = '') {
-    const obs = this.store.searchAlbums(query);
-
-    const sub = obs.subscribe((data) => {
-      // this.results = data;
-      console.log(data);
-    });
-    setTimeout(() => {
-      sub.unsubscribe();
-    }, 60);
-
-    obs.subscribe({
+    this.store.searchAlbums(query).subscribe({
       next: (res) => console.log(res),
-      error: (error) => console.log(error),
+      error: (error) => {
+        this.message = error.error.error.message;
+      },
       complete: () => console.log('complete'),
     });
   }
 
   ngOnInit() {
-    // this.search('Batman');
+    this.search('Batman');
   }
 }

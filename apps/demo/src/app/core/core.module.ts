@@ -2,13 +2,13 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { API_URL, INITIAL_PLAYLISTS_DATA } from './tokens';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthConfig } from 'angular-oauth2-oidc';
+import { authConfig } from './authConfig';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    HttpClientModule
-  ],
+  imports: [CommonModule],
   providers: [
     // HttpClient,
     {
@@ -17,8 +17,17 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     },
     {
       provide: API_URL,
-      useValue: 'https://api.spotify.com/v1/'
-    }
+      useValue: 'https://api.spotify.com/v1/',
+    },
+    {
+      provide: AuthConfig,
+      useFactory() {
+        return authConfig;
+      },
+    },
   ],
 })
 export class CoreModule {}
+
+
+
