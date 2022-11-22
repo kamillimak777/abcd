@@ -18,4 +18,6 @@ export class PlaylistsStoreService {
   getPlaylistById(id: Playlist['id']) {}
 
   save(draft: Playlist) {}
+
+  create(draft: Playlist) {}
 }
