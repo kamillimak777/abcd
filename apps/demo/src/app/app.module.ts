@@ -6,6 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
+import { INITIAL_PLAYLISTS_DATA } from './core/tokens';
+import { mockPlaylists } from './core/mocks/playlistsMocks';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -16,22 +19,34 @@ const routes: Routes = [
   {
     path: 'playlists',
     loadChildren: () =>
-      import('./playlists/playlists.module').then((m) => m.PlaylistsModule),
+      import('./playlists/playlists.module') //
+        .then((m) => m.PlaylistsModule),
   },
 ];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CoreModule,
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, {
       useHash: true,
     }),
     SharedModule,
-    CoreModule,
+    // environment.production ? [] : [MockModule],
   ],
-  providers: [],
+  providers: [
+    // TreeShaking // Dead Code Removal
+    environment.production
+      ? []
+      : [
+          {
+            provide: INITIAL_PLAYLISTS_DATA,
+            useValue: mockPlaylists,
+          },
+        ],
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
