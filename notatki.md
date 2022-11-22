@@ -101,6 +101,13 @@ Would you like to proceed? Yes
 ? Set up global Angular Material typography styles? Yes
 ? Set up browser animations for Angular Material? Yes
 
+
+## Angular Devtools
+
+https://angular.io/guide/devtools
+https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh
+https://addons.mozilla.org/en-GB/firefox/addon/angular-devtools/
+
 ## Playlists module
 
 npx nx generate @schematics/angular:module playlists --project=demo --module=app --route=playlists
@@ -116,10 +123,23 @@ npx nx generate @schematics/angular:component playlists/components/playlist-edit
 npx nx generate @schematics/angular:module shared --module=app
 npx nx generate @schematics/angular:component shared/components/clock --export 
 
+## Core module
 
-## Angular Devtools
+npx nx generate @schematics/angular:module core --module=app
+npx nx generate @schematics/angular:service core/services/playlist-store 
 
-https://angular.io/guide/devtools
-https://chrome.google.com/webstore/detail/angular-devtools/ienfalfjdbdpebioblfackkekamfmbnh
-https://addons.mozilla.org/en-GB/firefox/addon/angular-devtools/
+## Music Search module
+
+npx nx generate @schematics/angular:module music --project=demo --module=app --route=music
+
+npx nx generate @schematics/angular:component music/containers/album-search-view --project=demo --module=music --display-block --type=Container
+npx nx generate @schematics/angular:component music/containers/album-details-view --project=demo --module=music --display-block --type=Container
+
+npx nx generate @schematics/angular:component music/components/search-form
+npx nx generate @schematics/angular:component music/components/results-grid
+npx nx generate @schematics/angular:component music/components/album-card 
+
+npx nx generate @schematics/angular:interface core/models/album 
+npx nx generate @schematics/angular:service core/services/music-store 
+
 
