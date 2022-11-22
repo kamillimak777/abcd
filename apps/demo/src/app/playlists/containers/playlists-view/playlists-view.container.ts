@@ -20,24 +20,30 @@ export class PlaylistsViewContainer implements OnInit {
   }
 
   fetchPlaylists() {
-    this.playlists = this.service.findPlaylists();
+    this.service.findPlaylists().subscribe((data) => {
+      this.playlists = data;
+    });
   }
 
   savePlaylist(draft: Playlist) {
-    this.service.save(draft);
-    this.fetchPlaylists()
-    this.selectPlaylistById(draft.id);
+    this.service.save(draft).subscribe(() => {
+      this.fetchPlaylists();
+      this.selectPlaylistById(draft.id);
+    });
   }
-  
+
   createPlaylist(draft: Playlist) {
-    this.service.create(draft);
-    this.fetchPlaylists()
-    this.selectPlaylistById(draft.id);
+    this.service.create(draft).subscribe(() => {
+      this.fetchPlaylists();
+      this.selectPlaylistById(draft.id);
+    });
   }
 
   selectPlaylistById(id: Playlist['id']) {
-    this.selected = this.service.getPlaylistById(id);
-    this.showDetails();
+    this.service.getPlaylistById(id).subscribe((sel) => {
+      this.selected = sel;
+      this.showDetails();
+    });
   }
 
   showCreator() {
