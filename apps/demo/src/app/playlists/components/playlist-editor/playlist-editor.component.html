@@ -1,7 +1,7 @@
 <pre>{{ playlist | json }}</pre>
 
 <form #formRef="ngForm" (ngSubmit)="submit()" *ngIf="playlist">
-  <mat-form-field appearance="standard" class="row">
+  <mat-form-field class="row">
     <mat-label>Name</mat-label>
     <input
       type="text"
@@ -22,7 +22,7 @@
     Public
   </mat-checkbox>
 
-  <mat-form-field appearance="standard" class="row">
+  <mat-form-field class="row">
     <mat-label>Description</mat-label>
     <textarea
       matInput

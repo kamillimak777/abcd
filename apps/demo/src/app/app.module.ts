@@ -8,8 +8,6 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { INITIAL_PLAYLISTS_DATA } from './core/tokens';
 import { mockPlaylists } from './core/mocks/playlistsMocks';
-import { environment } from '../environments/environment';
-
 const routes: Routes = [
   {
     path: '',
@@ -38,14 +36,10 @@ const routes: Routes = [
   ],
   providers: [
     // TreeShaking // Dead Code Removal
-    environment.production
-      ? []
-      : [
-          {
-            provide: INITIAL_PLAYLISTS_DATA,
-            useValue: mockPlaylists,
-          },
-        ],
+    {
+      provide: INITIAL_PLAYLISTS_DATA,
+      useValue: mockPlaylists,
+    },
   ],
   bootstrap: [AppComponent],
 })
