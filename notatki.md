@@ -145,3 +145,6 @@ npx nx generate @schematics/angular:service core/services/music-store
 
 ## Mocking REST API in browser
 https://mswjs.io/
+
+## Clean Architecture 
+https://medium.com/taager-tech-blog/clean-architecture-for-angular-applications-b7ab140f0d5a
