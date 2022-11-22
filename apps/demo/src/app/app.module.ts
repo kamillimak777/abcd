@@ -11,7 +11,7 @@ import { mockPlaylists } from './core/mocks/playlistsMocks';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/playlists',
+    redirectTo: '/music/search',
     pathMatch: 'full',
   },
   {
@@ -20,6 +20,7 @@ const routes: Routes = [
       import('./playlists/playlists.module') //
         .then((m) => m.PlaylistsModule),
   },
+  { path: 'music', loadChildren: () => import('./music/music.module').then(m => m.MusicModule) },
 ];
 
 @NgModule({

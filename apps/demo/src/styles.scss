@@ -13,12 +13,20 @@ body {
 }
 
 .row {
-  width: calc(100% - 4rem);
+  width: calc(100% - 2rem);
   display: flex;
   gap: 2rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+  grid-template-columns: repeat(4, 25%);
+}
+.grid > * {
 }
 
 .col {
