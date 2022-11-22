@@ -19,8 +19,17 @@ export class AlbumSearchViewContainer {
   constructor(private store: MusicStoreService) {}
 
   search(query = '') {
-    this.store.searchAlbums(query).subscribe((data) => {
-      this.results = data;
+    const obs = this.store.searchAlbums(query);
+
+    obs.subscribe((data) => {
+      // this.results = data;
+      console.log(data)
+    });
+
+    obs.subscribe({
+      next: (res) => console.log(res),
+      error: (error) => console.log(error),
+      complete: () => console.log('complete'),
     });
   }
 

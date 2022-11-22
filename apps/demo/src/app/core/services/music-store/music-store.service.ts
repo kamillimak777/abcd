@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { albumsMock } from '../../mocks/albumsMock';
+import { AlbumResponse } from '../../model/Album';
 import { API_URL } from '../../tokens';
 
 @Injectable({
@@ -14,8 +15,12 @@ export class MusicStoreService {
   ) {}
 
   searchAlbums(query: string) {
-    this.http.get(this.api_url + 'albums');
+    const obs = this.http.get<AlbumResponse[]>(this.api_url + 'albums', {
+      params: { type: 'album', query },
+      headers: {},
+    });
 
-    return of(albumsMock);
+    // return of(albumsMock);
+    return obs;
   }
 }
