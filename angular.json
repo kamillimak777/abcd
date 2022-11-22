@@ -155,6 +155,9 @@
       "linter": "eslint",
       "unitTestRunner": "jest"
     },
+    "@nrwl/angular:service": {
+      "flat": false
+    },
     "@nrwl/angular:component": {
       "style": "scss"
     }

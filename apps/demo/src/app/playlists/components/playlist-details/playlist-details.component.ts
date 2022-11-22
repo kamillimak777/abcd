@@ -7,7 +7,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { Playlist } from '../playlist-list/Playlist';
+import { Playlist } from '../../../core/model/Playlist';
 
 @Component({
   selector: 'app-playlist-details',

@@ -1,26 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Playlist } from '../../components/playlist-list/Playlist';
+import { Component, Inject, OnInit } from '@angular/core';
+import { PlaylistsStoreService } from '../../../core/services/playlists-store/playlists-store.service';
+import { Playlist } from '../../../core/model/Playlist';
 
-const mockPlaylists = [
-  {
-    id: '123',
-    name: 'Playlist 123',
-    public: true,
-    description: 'BEst Playlist',
-  },
-  {
-    id: '234',
-    name: 'Playlist 234',
-    public: false,
-    description: 'Awesome Playlist',
-  },
-  {
-    id: '345',
-    name: 'Playlist 345',
-    public: true,
-    description: 'Cool Playlist',
-  },
-];
+
 @Component({
   selector: 'app-playlists-view',
   templateUrl: './playlists-view.container.html',
@@ -29,12 +11,28 @@ const mockPlaylists = [
 export class PlaylistsViewContainer implements OnInit {
   mode: 'details' | 'editor' | 'creator' = 'details';
 
-  playlists: Playlist[] = mockPlaylists;
+  playlists: Playlist[] = [];
   selectedId: Playlist['id'] = '';
   // selected: Playlist | undefined = this.playlists[0];
   selected?: Playlist; //  = this.playlists[0];
 
-  constructor() {}
+  constructor(
+    // @Inject(PlaylistsStoreService) 
+    private service: PlaylistsStoreService
+  ) {}
+  
+  ngOnInit(): void {
+    this.playlists = this.service.findPlaylists()
+  }
+
+
+  savePlaylist(draft: Playlist) {
+    console.log('Saving...', draft);
+  }
+
+  createPlaylist(draft: Playlist) {
+    console.log('Saving...', draft);
+  }
 
   selectPlaylistById(id: Playlist['id']) {
     this.selectedId = id;
@@ -53,13 +51,4 @@ export class PlaylistsViewContainer implements OnInit {
     this.mode = 'details';
   }
 
-  savePlaylist(draft: Playlist) {
-    console.log('Saving...', draft);
-  }
-
-  createPlaylist(draft: Playlist) {
-    console.log('Saving...', draft);
-  }
-
-  ngOnInit(): void {}
 }

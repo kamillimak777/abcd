@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatSelectionList } from '@angular/material/list';
-import { Playlist } from './Playlist';
+import { Playlist } from '../../../core/model/Playlist';
 
 @Component({
   selector: 'app-playlist-list',
