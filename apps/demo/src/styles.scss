@@ -1,4 +1,7 @@
+@use '~@angular/material' as mat;
+
 /* You can add global styles to this file, and also import other style files */
+// @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 html,
 body {
@@ -8,8 +11,6 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
-
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 .row {
   width: calc(100% - 4rem);
@@ -22,4 +23,39 @@ body {
 
 .col {
   flex: 1;
+}
+
+/// ======
+
+@include mat.core();
+
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+    ),
+  )
+);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+// @include mat.button-theme($my-theme);
+
+@include mat.all-component-themes($my-theme);
+
+$my-palette: mat.define-palette(mat.$indigo-palette);
+
+// .my-custom-style {
+//   background: mat.get-color-from-palette($my-palette, '500');
+//   color: mat.get-color-from-palette($my-palette, '500-contrast');
+// }
+
+.mat-list-base .mat-list-item.mat-list-single-selected-option {
+  background: mat.get-color-from-palette($my-primary);
+  color: mat.get-color-from-palette($my-primary, '500-contrast');
 }
