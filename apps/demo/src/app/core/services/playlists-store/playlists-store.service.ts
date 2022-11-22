@@ -25,7 +25,7 @@ export class PlaylistsStoreService {
   }
 
   create(draft: Playlist) {
-    draft.id = crypto.randomUUID();
+    draft.id = (Date.now()).toString()
     this.playlists.push(draft);
   }
 }
