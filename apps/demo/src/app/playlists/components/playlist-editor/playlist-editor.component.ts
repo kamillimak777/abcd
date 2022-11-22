@@ -40,12 +40,6 @@ export class PlaylistEditorComponent implements OnInit {
       ...this.playlist,
       ...this.formRef?.value,
     });
-
-    // this.formRef?.resetForm({
-    //   name: '',
-    //   public: false,
-    //   description: '',
-    // });
   }
 
   constructor() {}
