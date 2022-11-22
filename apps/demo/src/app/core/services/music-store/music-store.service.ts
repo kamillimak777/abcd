@@ -1,6 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { catchError, EMPTY, map, of, throwError } from 'rxjs';
+import {
+  catchError,
+  delay,
+  EMPTY,
+  iif,
+  map,
+  of,
+  retry,
+  switchMap,
+  throwError,
+  timer,
+} from 'rxjs';
 import { albumsMock } from '../../mocks/albumsMock';
 import { AlbumResponse, AlbumSearchResponse } from '../../model/Album';
 import { API_URL } from '../../tokens';
@@ -26,15 +37,25 @@ export class MusicStoreService {
       })
       .pipe(
         map((res) => res.albums.items),
-        catchError((error, originalObs) => {
-          // return [] // -|
-          // return [albumsMock,albumsMock]; // -OO|
-          // return of(albumsMock); // -O|
-          // this.http.get('backup_server')...
-          // return EMPTY; // -|
-
-          return throwError(() => new Error(error.error.error.message));
+        retry({
+          // count: 3,
+          delay(error, retryCount) {
+            return iif(
+              () => retryCount < 3,
+              timer(retryCount ** 2 * 500),
+              throwError(() => new Error('Timeout'))
+            );
+          },
         })
+        // catchError((error, originalObs) => {
+        //   // return [] // -|
+        //   // return [albumsMock,albumsMock]; // -OO|
+        //   // return of(albumsMock); // -O|
+        //   // this.http.get('backup_server')...
+        //   // return EMPTY; // -|
+
+        //   return throwError(() => new Error(error.error.error.message));
+        // })
       );
   }
 }
