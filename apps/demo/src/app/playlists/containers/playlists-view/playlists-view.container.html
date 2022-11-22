@@ -4,31 +4,28 @@
       [items]="playlists"
       (selectedIdChange)="selectPlaylistById($event) "
     ></app-playlist-list>
-
-    
   </div>
   <div class="col">
-    <input
+    <!-- <input
       type="text"
       [value]="selected.name"
       (keyup)="selected.name = $any($event).target.value"
-    />
+    /> -->
     <!-- (keyup)="selected = $any({name: $any($event).target.value})" -->
-    
-
-    <button mat-raised-button color="warn" (click)="showDetails()">
-      Cancel
-    </button>
-    <button mat-raised-button color="primary" (click)="showEditor()">
-      Edit
-    </button>
-    {{mode}}
 
     <ng-container [ngSwitch]="mode">
-      
-      <app-playlist-details [playlist]="selected" *ngSwitchDefault></app-playlist-details>
+      <app-playlist-details
+        (edit)="showEditor()"
+        [playlist]="selected"
+        *ngSwitchDefault
+      ></app-playlist-details>
 
-      <app-playlist-editor [playlist]="selected" *ngSwitchCase=" 'editor' "></app-playlist-editor>
+      <app-playlist-editor
+      (save)="savePlaylist($event)"
+      (cancel)="showDetails()"
+        [playlist]="selected"
+        *ngSwitchCase=" 'editor' "
+      ></app-playlist-editor>
     </ng-container>
   </div>
 </div>

@@ -22,13 +22,13 @@
     Public
   </mat-checkbox>
 
-  <div
+  <!-- <div
     contenteditable="true"
     [(ngModel)]="playlist.description"
     name="description"
   >
     Placki
-  </div>
+  </div> -->
 
   <mat-form-field appearance="standard" class="row">
     <mat-label>Description</mat-label>
@@ -39,6 +39,7 @@
     ></textarea>
   </mat-form-field>
 
+  <button mat-raised-button color="warn" (click)="cancel.emit()">Cancel</button>
   <button mat-raised-button type="submit">Submit</button>
 </form>
 

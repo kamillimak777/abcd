@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Playlist } from '../playlist-list/Playlist';
 
 @Component({
@@ -16,7 +16,13 @@ export class PlaylistDetailsComponent implements OnInit {
     description: 'Awesome Playlist',
   };
 
+  @Output() edit = new EventEmitter();
+
   constructor() {}
+
+  editClick(){
+    this.edit.emit()
+  }
 
   ngOnInit(): void {}
 }

@@ -1,53 +1,56 @@
 <!-- mat-list>mat-list-item*3>span.matLine{ $. Playlist $$$}+mat-divider -->
-<mat-list 
-    [id]="'playlist-'+playlist.id"
-    [attr.data-playlist-id]="playlist.id">
-    <!--  -->
+<mat-list
+  [id]="'playlist-' + playlist.id"
+  [attr.data-playlist-id]="playlist.id"
+>
+  <!--  -->
 
-    <mat-list-item>
-        <div matLine>Name:</div>
-        <div [style.font-size.px]=" 20+2 "> {{playlist.name}}</div>
-        <mat-divider></mat-divider>
-    </mat-list-item>
+  <mat-list-item>
+    <div matLine>Name:</div>
+    <div [style.font-size.px]="20 + 2">{{ playlist.name }}</div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
 
-    <mat-list-item>
-        <div matLine>Public</div>
+  <mat-list-item>
+    <div matLine>Public</div>
 
-        <div class="placki"
-             [ngClass]="{
-                isPublic: playlist.public,
-                isPrivate: !playlist.public
-             }">
-            {{ playlist.public? 'Yes':'No' }} 
-        </div>
+    <div
+      class="placki"
+      [ngClass]="{
+        isPublic: playlist.public,
+        isPrivate: !playlist.public
+      }"
+    >
+      {{ playlist.public ? 'Yes' : 'No' }}
+    </div>
 
-        <mat-divider></mat-divider>
-    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list-item>
 
-    <mat-list-item>
-        <div matLine>Description:</div>
-        <div>  {{playlist.description}} </div>
-        <mat-divider></mat-divider>
-    </mat-list-item>
+  <mat-list-item>
+    <div matLine>Description:</div>
+    <div>{{ playlist.description }}</div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
 </mat-list>
 
+<button mat-raised-button color="primary" (click)="editClick()">Edit</button>
 
-        
-        <!-- <div [style.color]=" playlist.public? 'red' : 'green' "> </div> -->
-        
-        <!-- <div [ngStyle]=" {
+<!-- <div [style.color]=" playlist.public? 'red' : 'green' "> </div> -->
+
+<!-- <div [ngStyle]=" {
             'color': playlist.public? 'red' : 'green',
             'border-bottom': '1px solid currentColor'
         } "></div>  -->
-        
-        <!-- <div style="border-bottom:1px solid currentColor" [ngStyle]=" {
+
+<!-- <div style="border-bottom:1px solid currentColor" [ngStyle]=" {
             'color': playlist.public? 'red' : 'green'            
         } "> -->
 
-        <!-- <div [class]="playlist.public? 'red' : 'green' "> </div> -->
-        <!-- <div ngClass [class]="playlist.public? 'red' : 'green' "> </div> -->
+<!-- <div [class]="playlist.public? 'red' : 'green' "> </div> -->
+<!-- <div ngClass [class]="playlist.public? 'red' : 'green' "> </div> -->
 
-        <!-- <div class="placki"
+<!-- <div class="placki"
              [class.isPublic]="playlist.public "
              [class.isPrivate]="playlist.public === false"> 
             {{ playlist.public? 'Yes':'No' }} 

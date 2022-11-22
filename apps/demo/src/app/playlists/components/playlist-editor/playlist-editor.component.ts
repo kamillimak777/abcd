@@ -2,8 +2,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
@@ -23,6 +25,9 @@ export class PlaylistEditorComponent implements OnInit {
     description: 'Awesome Playlist',
   };
 
+  @Output() cancel = new EventEmitter();
+  @Output() save = new EventEmitter<Playlist>();
+
   @ViewChild('formRef', { read: NgForm })
   formRef?: NgForm;
 
@@ -30,19 +35,17 @@ export class PlaylistEditorComponent implements OnInit {
 
   submit() {
     if (this.formRef?.invalid) return;
-    console.log(this.formRef?.value);
 
-    // this.formRef?.setValue({
+    this.save.emit({
+      ...this.playlist,
+      ...this.formRef?.value,
+    });
+
+    // this.formRef?.resetForm({
     //   name: '',
     //   public: false,
     //   description: '',
     // });
-
-    this.formRef?.resetForm({
-      name: '',
-      public: false,
-      description: '',
-    });
   }
 
   constructor() {}
