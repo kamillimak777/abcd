@@ -21,10 +21,13 @@ export class AlbumSearchViewContainer {
   search(query = '') {
     const obs = this.store.searchAlbums(query);
 
-    obs.subscribe((data) => {
+    const sub = obs.subscribe((data) => {
       // this.results = data;
-      console.log(data)
+      console.log(data);
     });
+    setTimeout(() => {
+      sub.unsubscribe();
+    }, 60);
 
     obs.subscribe({
       next: (res) => console.log(res),
