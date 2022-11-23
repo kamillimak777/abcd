@@ -172,3 +172,6 @@ https://github.com/gvergnaud/ts-pattern
 
 ## NgRx
 npx nx generate @ngrx/schematics:store core --module=core --project=demo --no-flat --root --stateInterface=AppState
+
+npx nx generate @ngrx/schematics:reducer user-session  --api --no-flat --group --reducers=reducers/index.ts 
+
