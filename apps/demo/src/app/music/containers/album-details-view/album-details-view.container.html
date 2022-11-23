@@ -1,1 +1,27 @@
-<p>album-details-view works!</p>
+<div class="row">
+  <div class="col">
+    <h2 class="mat-h2">tytul tutaj</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <app-album-card [album]="album"></app-album-card>
+  </div>
+  <div class="col">
+    <mat-list>
+      <mat-list-item>
+        <span matLine><strong>Artist</strong></span>
+        <span >artists[0].name</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span matLine><strong>Release date</strong></span>
+        <span >album.release_date</span>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list>
+      <mat-list-item> 1. Track 1 </mat-list-item>
+      <mat-list-item> 2. Track 22 </mat-list-item>
+    </mat-list>
+  </div>
+</div>

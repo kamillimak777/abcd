@@ -33,7 +33,7 @@ export class MusicStoreService {
   constructor(private http: HttpClient) {}
 
   getAlbumById(id: string) {
-    return this.http.get<unknown>('albums' + id);
+    return this.http.get<unknown>('albums/' + id);
   }
 
   searchAlbums(query: string) {
