@@ -21,9 +21,13 @@ function parseId(id: AllowedIdTypes) {
     return id.toUpperCase()
   }
 
-  // Exhaustiveness Check
-  const _shouldNotHappen: never = id
-  throw new Error('Unexpected id type!')
+  exhaustivenessCheck(id)
+  // const zcx = 123 // Dead code
 }
 
-const res = parseId({} as 123)
+// Exhaustiveness Check
+function exhaustivenessCheck(_shouldNotHappen: never): never {
+  throw new Error('Unexpected type!')
+}
+
+// const res = parseId({} as 123)
