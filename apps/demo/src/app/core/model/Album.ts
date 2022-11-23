@@ -4,6 +4,20 @@ export interface AlbumSearchResponse {
     albums: PagingObject<AlbumResponse>
 }
 
+export function isAlbumSearchResponse(res: any): asserts res is AlbumSearchResponse {
+    if (
+      !(
+        res &&
+        'albums' in res &&
+        'items' in res.albums &&
+        Array.isArray(res.albums.items)
+      )
+    ) {
+      throw new Error('Invalid Search Response');
+    }
+  }
+  
+
 export interface AlbumResponse {
     album_type:             string;
     total_tracks:           number;
