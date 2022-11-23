@@ -1,7 +1,8 @@
-interface Track { id: string, name: string; duration_ms: number }
-interface Episode { id: string, name: string;   }
+interface Track { type: 'track', id: string, name: string; duration_ms: number }
+interface Episode { type: 'episode', id: string, name: string; }
 
 export interface Playlist {
+  type: 'playlist'
   id: string;
   name: string;
   public: boolean;
@@ -9,14 +10,24 @@ export interface Playlist {
   tracks?: Track[]
 }
 
+function getInfo2(res: Playlist | Track /* | Episode */) {
+  switch (res.type) {
+    case 'playlist':
+      return `${res.name} has ${res.tracks?.length ?? 'no'} tracks`
+    case 'track':
+      return `${res.name} has ${res.duration_ms}ms length`
+    default: exhaustivenessCheck(res)
+  }
+}
 
 // if (x != null)
 // if (typeof x == primitive)
 // if (x instanceof Constructor)
 // if ('key' in x )
+// switch( x.discriminatorKey )
 
 
-function getInfo(res: Playlist | Track ) {
+function getInfo(res: Playlist | Track) {
   if ('public' in res) {
     return `${res.name} has ${res.tracks?.length ?? 'no'} tracks`
   }

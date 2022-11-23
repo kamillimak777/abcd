@@ -20,7 +20,7 @@ import { Playlist } from '../../../core/model/Playlist';
 })
 export class PlaylistEditorComponent implements OnInit {
   @Input() playlist?: Playlist = {
-    id: '',
+    id: '', type: 'playlist',
     name: '',
     public: false,
     description: '',
