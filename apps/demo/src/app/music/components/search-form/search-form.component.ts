@@ -31,6 +31,15 @@ export class SearchFormComponent {
   // constructor(private fb: UntypedFormBuilder) {}
   constructor(private fb: NonNullableFormBuilder) {
     window.form = this.searchForm;
+
+    this.searchForm.controls.query.valueChanges.pipe(
+      // minimum 3 characters
+
+      // no duplicates 
+
+      // wait for 500ms silence
+      
+    ).subscribe(console.log)
   }
 
   submit() {
@@ -44,7 +53,7 @@ declare global {
     //   query: FormControl<string>;
     //   type: FormControl<string>;
     // }>;
-    form: typeof SearchFormComponent.prototype.searchForm;
+    form?: typeof SearchFormComponent.prototype.searchForm;
   }
 }
 
