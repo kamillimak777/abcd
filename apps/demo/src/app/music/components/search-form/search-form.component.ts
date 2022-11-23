@@ -67,7 +67,7 @@ export class SearchFormComponent {
         // console.log('Complete');
         subscriber.complete();
         // subscriber.error()
-      }, 1000);
+      }, 500);
 
       // Destructor:
       return () => {
