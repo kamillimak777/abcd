@@ -26,25 +26,20 @@ export class AlbumSearchViewContainer {
         tap((q) => (this.query = q)),
         filter(Boolean) // typeGuard
       )
-      .subscribe((q) => {
-        this.search(q);
+      .subscribe((query) => {
+        this.store.searchAlbums(query).subscribe({
+          next: (albums) => (this.results = albums),
+          error: (error) => (this.message = error.message),
+        });
       });
   }
 
   search(query = '') {
-    // this.router.navigate(['/music','search'])
-    // this.router.navigate(['..','albums', 123], { relativeTo: this.route})
-
     this.router.navigate(['.'], {
       relativeTo: this.route,
       queryParams: {
         q: query,
       },
-    });
-
-    this.store.searchAlbums(query).subscribe({
-      next: (albums) => (this.results = albums),
-      error: (error) => (this.message = error.message),
     });
   }
 
