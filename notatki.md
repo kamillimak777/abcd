@@ -157,3 +157,9 @@ https://rxviz.com/examples/mouse-move
 https://www.learnrxjs.io/learn-rxjs/operators
 
 
+
+## ErrorService - Log Telemetry
+
+https://docs.datadoghq.com/integrations/rum_angular/
+
+https://docs.sentry.io/platforms/javascript/guides/angular/configuration/integrations/plugin/

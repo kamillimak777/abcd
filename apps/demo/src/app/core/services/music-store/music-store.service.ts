@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { ErrorHandler, Inject, Injectable } from '@angular/core';
 import {
   catchError,
   delay,
@@ -24,7 +24,8 @@ export class MusicStoreService {
   constructor(
     @Inject(API_URL) private api_url: string,
     private http: HttpClient,
-    private auth: AuthService
+    private auth: AuthService,
+    private errorHandler: ErrorHandler
   ) { }
 
   searchAlbums(query: string) {
@@ -49,6 +50,8 @@ export class MusicStoreService {
           },
         }),
         catchError((error, originalObs) => {
+          this.errorHandler.handleError(error)
+          
           if (!(error instanceof HttpErrorResponse))
             throw new Error('Unexpected Error')
 

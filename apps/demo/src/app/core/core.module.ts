@@ -1,4 +1,4 @@
-import { InjectionToken, NgModule } from '@angular/core';
+import { ErrorHandler, InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { API_URL, INITIAL_PLAYLISTS_DATA } from './tokens';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -11,6 +11,10 @@ import { authConfig } from './authConfig';
   imports: [CommonModule],
   providers: [
     // HttpClient,
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: AwesomeTelemetryErrorHandler
+    // },
     {
       provide: INITIAL_PLAYLISTS_DATA,
       useValue: [],
