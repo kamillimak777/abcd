@@ -7,6 +7,10 @@ import { PlaylistListComponent } from './components/playlist-list/playlist-list.
 import { PlaylistDetailsComponent } from './components/playlist-details/playlist-details.component';
 import { PlaylistEditorComponent } from './components/playlist-editor/playlist-editor.component';
 import { SharedModule } from '../shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import * as fromPlaylists from './store/playlists.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { PlaylistsEffects } from './store/playlists.effects';
 
 const routes: Routes = [
   {
@@ -31,9 +35,14 @@ const routes: Routes = [
     PlaylistEditorComponent,
   ],
   imports: [
-    CommonModule, 
-    RouterModule.forChild(routes), 
-    SharedModule
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    StoreModule.forFeature(
+      fromPlaylists.playlistsFeatureKey,
+      fromPlaylists.reducer
+    ),
+    EffectsModule.forFeature([PlaylistsEffects]),
   ],
 })
 export class PlaylistsModule {}

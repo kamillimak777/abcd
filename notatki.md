@@ -175,3 +175,4 @@ npx nx generate @ngrx/schematics:store core --module=core --project=demo --no-fl
 
 npx nx generate @ngrx/schematics:reducer user-session  --api --no-flat --group --reducers=reducers/index.ts 
 
+ npx nx generate @ngrx/schematics:feature playlists --project=demo --module=playlists --api 
