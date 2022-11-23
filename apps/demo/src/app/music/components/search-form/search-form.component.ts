@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, placki } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -28,10 +28,26 @@ export class SearchFormComponent {
   });
 
   // constructor(private fb: FormBuilder) {}
-  constructor(private fb: NonNullableFormBuilder) {}
   // constructor(private fb: UntypedFormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder) {
+    window.form = this.searchForm;
+  }
 
   submit() {
     this.search.emit(this.searchForm.value.query);
   }
+}
+
+declare global {
+  interface Window {
+    // form: FormGroup<{
+    //   query: FormControl<string>;
+    //   type: FormControl<string>;
+    // }>;
+    form: typeof SearchFormComponent.prototype.searchForm;
+  }
+}
+
+declare module '@angular/core' {
+  export const placki = 123;
 }

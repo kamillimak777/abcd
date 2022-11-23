@@ -9,7 +9,6 @@ import {
 import { catchError, iif, Observable, retry, throwError, timer } from 'rxjs';
 import { API_URL } from '../tokens';
 import { AuthService } from '../services/auth.service';
-import { HTTPAuthToken } from '../services/music-store/music-store.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -29,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
       });
     }
 
-    const auth_enabled = request.context.get(HTTPAuthToken);
+    // const auth_enabled = request.context.get(HTTPAuthToken);
 
     if (request.url.match(new RegExp('^' + 'https://api.spotify.com'))) {
       request = request.clone({

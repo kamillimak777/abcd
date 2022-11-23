@@ -15,9 +15,9 @@ export class AlbumSearchViewContainer {
 
   search(query = '') {
     this.store.searchAlbums(query).subscribe({
-      next: (albums) => (this.results = albums), // -O-
-      error: (error) => (this.message = error.message), // -X-
-      complete: () => console.log('complete'), // --|
+      next: (albums) => (this.results = albums),
+      error: (error) => (this.message = error.message),
+      // complete: () => console.log('complete'),
     });
   }
 

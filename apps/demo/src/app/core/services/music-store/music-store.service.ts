@@ -26,8 +26,6 @@ import {
 import { API_URL } from '../../tokens';
 import { AuthService } from '../auth.service';
 
-export const HTTPAuthToken = new HttpContextToken(() => true);
-
 @Injectable({
   providedIn: 'root',
 })
@@ -39,13 +37,9 @@ export class MusicStoreService {
   }
 
   searchAlbums(query: string) {
-    const AuthCtx = new HttpContext();
-    AuthCtx.set(HTTPAuthToken, false);
-    
     return this.http
       .get<unknown>('search', {
         params: { type: 'album', query },
-        context: AuthCtx,
       })
       .pipe(
         map((res) => {
