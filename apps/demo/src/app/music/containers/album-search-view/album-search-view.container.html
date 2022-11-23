@@ -9,18 +9,11 @@
 
 <div class="row">
   <div class="col">
-    
-    
-    <ng-container *ngIf="resultsChanges | async as results">
-      <p>Found {{results.length}} results </p>
-    </ng-container>
-    
+    <button (click)="cancel()">Cancel</button>
 
-    
     <ng-container *ngIf="resultsChanges | async as results">
+      <p>Found {{results.length}} results</p>
       <app-results-grid [results]=" results "></app-results-grid>
     </ng-container>
-    
-
   </div>
 </div>

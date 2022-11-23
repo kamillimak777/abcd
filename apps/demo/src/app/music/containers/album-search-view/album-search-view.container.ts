@@ -9,6 +9,7 @@ import {
   filter,
   map,
   mergeMap,
+  Observable,
   ReplaySubject,
   share,
   shareReplay,
@@ -29,33 +30,30 @@ import { MusicStoreService } from '../../../core/services/music-store/music-stor
   providers: [],
 })
 export class AlbumSearchViewContainer {
-  query: string | null = '';
-
   queryChanges = this.route.queryParamMap //
-    .pipe(
-      map((qpm) => qpm.get('q')),
-      tap((q) => (this.query = q))
-      // tap((q) => doSomethingWithQuery(q))
-    );
+    .pipe(map((qpm) => qpm.get('q')));
 
-  resultsChanges = this.queryChanges.pipe(
-    filter(Boolean),
-    switchMap((query) =>
-      this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
-    ),
-    // share({
-    // connector: () => new Subject<AlbumResponse[]>(),
-    // connector: () => new BehaviorSubject<Album[]>(albumsMock),
-    // connector: () => new ReplaySubject<AlbumResponse[]>(3,10_000),
-    // })
-    shareReplay()
-  );
+  resultsChanges?: Observable<AlbumResponse[]>;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private store: MusicStoreService
   ) {}
+
+  cancel() {
+    this.resultsChanges = undefined; // AsyncPipe unsubscribes!
+  }
+
+  ngOnInit() {
+    this.resultsChanges = this.queryChanges.pipe(
+      filter(Boolean),
+      switchMap((query) =>
+        this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
+      ),
+      share()
+    );
+  }
 
   search(query = '') {
     this.router.navigate(['.'], {
@@ -65,6 +63,4 @@ export class AlbumSearchViewContainer {
       },
     });
   }
-
-  ngOnInit() {}
 }
