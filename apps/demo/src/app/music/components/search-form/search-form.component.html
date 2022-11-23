@@ -1,19 +1,31 @@
 <form [formGroup]="searchForm" (ngSubmit)="submit()">
-  <div class="row" >
+  <div class="row">
     <div class="col">
-      <mat-form-field style="width: 100%">
+      <mat-form-field
+        style="width: 100%"
+        *ngIf="searchForm.get('query') as queryField"
+      >
         <mat-label>Search</mat-label>
-        <input type="text" matInput formControlName="query"  />
-        
-        <mat-hint *ngIf="searchForm.get('query')?.hasError('required')">Minimum length is 3 </mat-hint>
-        <mat-hint *ngIf="searchForm.get('query')?.hasError('minlength')">
-          Minimum length is {{searchForm.get('query')?.getError('minlength').requiredLength}}
-        </mat-hint>
+        <input type="text" matInput formControlName="query" />
+        <mat-error *ngIf="queryField.hasError('required')">Query is required</mat-error>
+        <mat-error *ngIf="queryField.getError('minlength') as error">
+          Minimum length is {{ error.requiredLength }}
+        </mat-error>
       </mat-form-field>
-
+      
       <button type="submit" mat-fab style="margin: 25px 0 0 -56px">
         <mat-icon>search</mat-icon>
       </button>
     </div>
   </div>
 </form>
+
+<!-- <ng-container *ngIf="queryField.dirty || queryField.touched"> -->
+<!-- <mat-hint *ngIf="searchForm.get('query')?.getError('minlength'); let error = $implicit "> -->
+<!-- <mat-hint *ngIf="searchForm.get('query')?.getError('minlength'); let error "> -->
+<!-- <mat-hint *ngIf="searchForm.get('query')?.getError('minlength') as error "> -->
+
+<!-- if( bardzoDrogaIwolnaOpraacja() as wynik ){
+  // bardzoDrogaIwolnaOpraacja() 
+  wynik
+} -->

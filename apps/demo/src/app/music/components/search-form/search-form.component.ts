@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, placki } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -18,7 +19,15 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css'],
   providers: [
-    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+    // { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+    {
+      provide: ErrorStateMatcher,
+      useClass: class extends ErrorStateMatcher {
+        override isErrorState(control: AbstractControl) {
+          return control.dirty || control.touched;
+        }
+      },
+    },
   ],
 })
 export class SearchFormComponent {
@@ -26,10 +35,7 @@ export class SearchFormComponent {
 
   searchForm = this.fb.group({
     // query: this.fb.control('Batman')
-    query: ['batman',[
-      Validators.required,
-      Validators.minLength(3),
-    ]],
+    query: ['', [Validators.required, Validators.minLength(3)]],
     type: ['album'],
   });
 
