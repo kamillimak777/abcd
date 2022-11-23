@@ -9,6 +9,7 @@ import {
 import { catchError, iif, Observable, retry, throwError, timer } from 'rxjs';
 import { API_URL } from '../tokens';
 import { AuthService } from '../services/auth.service';
+import { HTTPAuthToken } from '../services/music-store/music-store.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -22,13 +23,13 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-
-
     if (!request.url.match(/^https?/)) {
       request = request.clone({
         url: this.api_url + request.url,
       });
     }
+
+    const auth_enabled = request.context.get(HTTPAuthToken);
 
     if (request.url.match(new RegExp('^' + 'https://api.spotify.com'))) {
       request = request.clone({
@@ -53,16 +54,15 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error, originalObs) => {
         this.errorHandler.handleError(error);
 
-        if (!(error instanceof HttpErrorResponse))
-          throw error
-          // throw new Error('Unexpected Error');
+        if (!(error instanceof HttpErrorResponse)) throw error;
+        // throw new Error('Unexpected Error');
 
         const errorResponse = error.error;
 
         if (!isSpotifyErrorResponse(errorResponse))
           throw new Error('Unexpected Error');
 
-        if(error.status === 401) this.auth.login()
+        if (error.status === 401) this.auth.login();
 
         return throwError(() => new Error(errorResponse.error.message));
       })
