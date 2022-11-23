@@ -16,20 +16,12 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 export class SearchFormComponent {
   @Output() search = new EventEmitter<string>();
 
-  // searchForm = new FormGroup({
-  //   query: new FormControl('batman', {
-  //     nonNullable: true,
-  //   }),
-  // });
-
   searchForm = this.fb.group({
     // query: this.fb.control('Batman')
     query: ['batman'],
     type: ['album'],
   });
 
-  // constructor(private fb: FormBuilder) {}
-  // constructor(private fb: UntypedFormBuilder) {}
   constructor(private fb: NonNullableFormBuilder) {
     window.form = this.searchForm;
 
@@ -37,14 +29,22 @@ export class SearchFormComponent {
       .pipe(
         // wait for 500ms silence
         debounceTime(500),
-        
+
         // no duplicates
         distinctUntilChanged(),
-        
+
         // minimum 3 characters
-        filter((x) => x.length >= 3),
+        filter((x) => x.length >= 3)
       )
-      .subscribe(console.log);
+      .subscribe(this.search);
+      
+      // .subscribe(console.log);
+      // .subscribe((query) => this.search.emit(query));
+      // .subscribe({
+      //   next: res => this.search.next(res),
+      //   error: res => this.search.error(res),
+      //   complete: () => this.search.complete(),
+      // })
   }
 
   submit() {
