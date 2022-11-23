@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, placki } from '@angular/core';
+import { Component, EventEmitter, Input, Output, placki } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
@@ -42,6 +42,16 @@ import {
 })
 export class SearchFormComponent {
   @Output() search = new EventEmitter<string>();
+
+  @Input() set query(q: string | null) {
+    this.searchForm.controls.query.setValue(q || '', {
+      emitEvent: false,
+    });
+  }
+
+  // ngOnChanges(changes: SimpleChanges): void {
+  // changes['query'].currentValue
+  // }
 
   censor = (control: AbstractControl<string>): ValidationErrors | null => {
     const badword = 'batman';
@@ -110,9 +120,8 @@ export class SearchFormComponent {
       // wait for 500ms silence
       debounceTime(500),
       // no duplicates
-      distinctUntilChanged(),
+      distinctUntilChanged()
     );
-
 
     // searchChanges.subscribe(console.log);
     searchChanges.subscribe(this.search);

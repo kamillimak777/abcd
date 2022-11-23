@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col">
-    <app-search-form (search)="search($event)"></app-search-form>
+    <app-search-form
+      [query]="query"
+      (search)="search($event)"
+    ></app-search-form>
   </div>
 </div>
 <div class="row">
