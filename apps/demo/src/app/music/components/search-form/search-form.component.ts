@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, placki } from '@angular/core';
 import {
   AbstractControl,
+  AsyncValidatorFn,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -13,7 +14,7 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
-import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-form',
@@ -43,14 +44,42 @@ export class SearchFormComponent {
     };
   };
 
+  asyncCensor = (
+    control: AbstractControl<string>
+  ): Observable<ValidationErrors | null> => {
+    //
+    return new Observable((subscriber) => {
+      console.log('Subscribe ' + control.value);
+      const result = this.censor(control);
+
+      const handle = setTimeout(() => {
+        console.log('Next: ' + control.value);
+        subscriber.next(result);
+
+        console.log('Complete');
+        subscriber.complete();
+        // subscriber.error()
+      }, 2000);
+
+      // Destructor:
+      return () => {
+        console.log('Unsubscribe');
+        clearTimeout(handle);
+      };
+    });
+    // .subscribe({ next: console.log })
+    // .unsubscribe()
+  };
+
   searchForm = this.fb.group({
     // query: this.fb.control('Batman')
     query: this.fb.control('', {
       validators: [
         Validators.required,
         Validators.minLength(3),
-        this.censor, //
+        // this.censor, //
       ],
+      asyncValidators: [this.asyncCensor],
     }),
 
     type: ['album'],
