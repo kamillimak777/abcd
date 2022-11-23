@@ -5,20 +5,31 @@ import {
   FormGroup,
   NonNullableFormBuilder,
   UntypedFormBuilder,
+  Validators,
 } from '@angular/forms';
+import {
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher,
+} from '@angular/material/core';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 
 @Component({
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.css'],
+  providers: [
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+  ],
 })
 export class SearchFormComponent {
   @Output() search = new EventEmitter<string>();
 
   searchForm = this.fb.group({
     // query: this.fb.control('Batman')
-    query: ['batman'],
+    query: ['batman',[
+      Validators.required,
+      Validators.minLength(3),
+    ]],
     type: ['album'],
   });
 
@@ -37,14 +48,14 @@ export class SearchFormComponent {
         filter((x) => x.length >= 3)
       )
       .subscribe(this.search);
-      
-      // .subscribe(console.log);
-      // .subscribe((query) => this.search.emit(query));
-      // .subscribe({
-      //   next: res => this.search.next(res),
-      //   error: res => this.search.error(res),
-      //   complete: () => this.search.complete(),
-      // })
+
+    // .subscribe(console.log);
+    // .subscribe((query) => this.search.emit(query));
+    // .subscribe({
+    //   next: res => this.search.next(res),
+    //   error: res => this.search.error(res),
+    //   complete: () => this.search.complete(),
+    // })
   }
 
   submit() {

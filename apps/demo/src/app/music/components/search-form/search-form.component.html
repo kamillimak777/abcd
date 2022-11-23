@@ -3,7 +3,12 @@
     <div class="col">
       <mat-form-field style="width: 100%">
         <mat-label>Search</mat-label>
-        <input type="text" matInput formControlName="query" />
+        <input type="text" matInput formControlName="query"  />
+        
+        <mat-hint *ngIf="searchForm.get('query')?.hasError('required')">Minimum length is 3 </mat-hint>
+        <mat-hint *ngIf="searchForm.get('query')?.hasError('minlength')">
+          Minimum length is {{searchForm.get('query')?.getError('minlength').requiredLength}}
+        </mat-hint>
       </mat-form-field>
 
       <button type="submit" mat-fab style="margin: 25px 0 0 -56px">
