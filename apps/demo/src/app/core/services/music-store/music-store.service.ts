@@ -30,14 +30,17 @@ export class MusicStoreService {
 
   searchAlbums(query: string) {
     return this.http
-      .get<AlbumSearchResponse>(this.api_url + 'search', {
+      .get<unknown>(this.api_url + 'search', {
         params: { type: 'album', query },
         headers: {
           Authorization: 'Bearer ' + this.auth.getToken(),
         },
       })
       .pipe(
-        map((res) => res.albums.items),
+        map((res) => {
+          isAlbumSearchResponse(res)
+          return res.albums.items
+        }),
         retry({
           delay(error, retryCount) {
             // Retry (with Exponential Backoff) only if no connection
@@ -51,7 +54,7 @@ export class MusicStoreService {
         }),
         catchError((error, originalObs) => {
           this.errorHandler.handleError(error)
-          
+
           if (!(error instanceof HttpErrorResponse))
             throw new Error('Unexpected Error')
 
@@ -82,3 +85,12 @@ function isSpotifyErrorResponse(res: any): res is SpotifyErrorResponse {
     && typeof res.error.message === 'string'
 }
 
+
+function isAlbumSearchResponse(res: any): asserts res is AlbumSearchResponse {
+  if (!(res 
+      && 'albums' in res 
+      && 'items' in res.albums 
+      && Array.isArray(res.album.items))) {
+    throw new Error('Invalid Search Response')
+  }
+}
