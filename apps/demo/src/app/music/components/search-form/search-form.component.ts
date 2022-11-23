@@ -6,6 +6,7 @@ import {
   NonNullableFormBuilder,
   UntypedFormBuilder,
 } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 
 @Component({
   selector: 'app-search-form',
@@ -34,11 +35,14 @@ export class SearchFormComponent {
 
     this.searchForm.controls.query.valueChanges.pipe(
       // minimum 3 characters
+      filter(x => x.length >= 3),
 
       // no duplicates 
+      distinctUntilChanged(),
 
       // wait for 500ms silence
-      
+      debounceTime(500)
+
     ).subscribe(console.log)
   }
 
