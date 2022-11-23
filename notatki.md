@@ -163,3 +163,8 @@ https://www.learnrxjs.io/learn-rxjs/operators
 https://docs.datadoghq.com/integrations/rum_angular/
 
 https://docs.sentry.io/platforms/javascript/guides/angular/configuration/integrations/plugin/
+
+## TS Data Parsing  - ZodTS + Ts-Pattern
+https://github.com/colinhacks/zod 
+
+https://github.com/gvergnaud/ts-pattern
