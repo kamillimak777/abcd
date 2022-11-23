@@ -12,6 +12,11 @@
     
     <ng-container *ngIf="resultsChanges | async as results">
       <p>Found {{results.length}} results </p>
+    </ng-container>
+    
+
+    
+    <ng-container *ngIf="resultsChanges | async as results">
       <app-results-grid [results]=" results "></app-results-grid>
     </ng-container>
     

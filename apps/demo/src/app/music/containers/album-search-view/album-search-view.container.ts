@@ -24,8 +24,14 @@ import { MusicStoreService } from '../../../core/services/music-store/music-stor
   providers: [],
 })
 export class AlbumSearchViewContainer {
+  query: string | null = '';
+
   queryChanges = this.route.queryParamMap //
-    .pipe(map((qpm) => qpm.get('q')));
+    .pipe(
+      map((qpm) => qpm.get('q')),
+      tap((q) => (this.query = q))
+      // tap((q) => doSomethingWithQuery(q))
+    );
 
   resultsChanges = this.queryChanges.pipe(
     filter(Boolean),
