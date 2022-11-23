@@ -1,27 +1,37 @@
-<div class="row">
-  <div class="col">
-    <h2 class="mat-h2">tytul tutaj</h2>
+<ng-container *ngIf="albumChanges | async as album; else loadingTpl">
+  <div class="row">
+    <div class="col">
+      <h2 class="mat-h2">{{album.name}}</h2>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <app-album-card [album]="album"></app-album-card>
-  </div>
-  <div class="col">
-    <mat-list>
-      <mat-list-item>
-        <span matLine><strong>Artist</strong></span>
-        <span >artists[0].name</span>
-      </mat-list-item>
-      <mat-list-item>
-        <span matLine><strong>Release date</strong></span>
-        <span >album.release_date</span>
-      </mat-list-item>
-    </mat-list>
+  <div class="row">
+    <div class="col">
+      <app-album-card [album]="album"></app-album-card>
+    </div>
+    <div class="col">
+      <mat-list>
+        <mat-list-item>
+          <div matLine><strong>Artist</strong></div>
+          <div>{{album.artists[0].name}}</div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+        <mat-list-item>
+          <div matLine><strong>Release date</strong></div>
+          <div>{{album.release_date}}</div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
 
-    <mat-list>
-      <mat-list-item> 1. Track 1 </mat-list-item>
-      <mat-list-item> 2. Track 22 </mat-list-item>
-    </mat-list>
+      <mat-list>
+        <mat-list-item *ngFor="let track of album.tracks?.items; index as i ">
+          {{i+1}}. {{track.name}}
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #loadingTpl>
+  <p>Loading album details ...</p>
+</ng-template>
