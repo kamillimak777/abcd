@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  BehaviorSubject,
   catchError,
   concatMap,
   EMPTY,
@@ -8,6 +9,9 @@ import {
   filter,
   map,
   mergeMap,
+  ReplaySubject,
+  share,
+  shareReplay,
   Subject,
   Subscription,
   switchMap,
@@ -15,7 +19,8 @@ import {
   takeWhile,
   tap,
 } from 'rxjs';
-import { Album } from '../../../core/model/Album';
+import { albumsMock } from '../../../core/mocks/albumsMock';
+import { Album, AlbumResponse } from '../../../core/model/Album';
 import { MusicStoreService } from '../../../core/services/music-store/music-store.service';
 @Component({
   selector: 'sages-ang-adv-album-search-view',
@@ -37,7 +42,13 @@ export class AlbumSearchViewContainer {
     filter(Boolean),
     switchMap((query) =>
       this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
-    )
+    ),
+    // share({
+    // connector: () => new Subject<AlbumResponse[]>(),
+    // connector: () => new BehaviorSubject<Album[]>(albumsMock),
+    // connector: () => new ReplaySubject<AlbumResponse[]>(3,10_000),
+    // })
+    shareReplay()
   );
 
   constructor(
