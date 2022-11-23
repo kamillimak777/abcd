@@ -40,16 +40,14 @@ export class AlbumSearchViewContainer {
         this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
       )
     );
-    this.sub1 = queryChanges.subscribe((q) => (this.query = q));
-    this.sub2 = resultsChanges.subscribe((albums) => (this.results = albums));
+    this.sub.add(queryChanges.subscribe((q) => (this.query = q)));
+    this.sub.add(resultsChanges.subscribe((albums) => (this.results = albums)));
   }
 
-  sub1?: Subscription;
-  sub2?: Subscription;
+  sub = new Subscription();
 
   ngOnDestroy(): void {
-    this.sub1?.unsubscribe();
-    this.sub2?.unsubscribe();
+    this.sub.unsubscribe();
   }
 
   search(query = '') {
