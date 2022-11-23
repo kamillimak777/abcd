@@ -33,17 +33,18 @@ export class SearchFormComponent {
   constructor(private fb: NonNullableFormBuilder) {
     window.form = this.searchForm;
 
-    this.searchForm.controls.query.valueChanges.pipe(
-      // minimum 3 characters
-      filter(x => x.length >= 3),
-
-      // no duplicates 
-      distinctUntilChanged(),
-
-      // wait for 500ms silence
-      debounceTime(500)
-
-    ).subscribe(console.log)
+    this.searchForm.controls.query.valueChanges
+      .pipe(
+        // wait for 500ms silence
+        debounceTime(500),
+        
+        // no duplicates
+        distinctUntilChanged(),
+        
+        // minimum 3 characters
+        filter((x) => x.length >= 3),
+      )
+      .subscribe(console.log);
   }
 
   submit() {
