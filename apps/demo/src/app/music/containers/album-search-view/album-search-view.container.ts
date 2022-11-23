@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  catchError,
   concatMap,
+  EMPTY,
   exhaustMap,
   filter,
   map,
@@ -27,24 +29,18 @@ export class AlbumSearchViewContainer {
     private route: ActivatedRoute,
     private store: MusicStoreService
   ) {
-    // this.route.snapshot.queryParamMap.get('q')
     this.route.queryParamMap
       .pipe(
         map((qpm) => qpm.get('q')),
         tap((q) => (this.query = q)),
         filter(Boolean),
-        // map(query => this.store.searchAlbums(query)),
-        // (obs) => obs // Observable<Observable<AlbumResponse[]>>
-
-        // mergeMap((query) => this.store.searchAlbums(query)), // subscribe all
-        // concatMap((query) => this.store.searchAlbums(query)), // subscribe one after one
-        // exhaustMap((query) => this.store.searchAlbums(query)), // subscribe first and ingnore // throttle
-        switchMap((query) => this.store.searchAlbums(query)), // subscribe lastone and unsubscribe prev // debounce
-        // (obs) => obs // Observable<AlbumResponse[]>
+        switchMap((query) =>
+          this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
+        )
       )
       .subscribe({
         next: (albums) => (this.results = albums),
-        error: (error) => (this.message = error.message),
+        // error: (error) => (this.message = error.message),
       });
   }
 
