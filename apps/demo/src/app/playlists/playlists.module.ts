@@ -21,7 +21,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: PlaylistsViewContainer,
+        // component: PlaylistsViewContainer,
+        component: PlaylistsContainerViewComponent,
       },
     ],
   },

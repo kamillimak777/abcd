@@ -29,13 +29,13 @@ export const reducer = createReducer(
     return { ...state, error: action.error };
   }),
 
-
   on(PlaylistsActions.loadPlaylistsSuccess, (state, action) => {
     return { ...state, playlists: action.data };
   }),
   on(PlaylistsActions.selectPlaylist, (state, action) => {
     return { ...state, selectedId: action.id };
   }),
-
-  
+  on(PlaylistsActions.selectPlaylistSuccess, (state, action) => {
+    return { ...state, selected: action.data };
+  })
 );

@@ -1,1 +1,12 @@
-<p>playlists-container-view works!</p>
+<div class="row">
+  <div class="col">
+    <app-playlist-list
+      [selectedId]="(selected | async)?.id"
+      (selectedIdChange)="selectPlaylist($event)"
+      [items]="(playlists | async) || []"
+    ></app-playlist-list>
+  </div>
+  <div class="col" *ngIf="selected | async as playlist">
+    <app-playlist-details [playlist]="playlist"></app-playlist-details>
+  </div>
+</div>

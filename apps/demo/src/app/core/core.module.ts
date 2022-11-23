@@ -11,6 +11,7 @@ import { AuthConfig } from 'angular-oauth2-oidc';
 import { authConfig } from './authConfig';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from '../reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -19,6 +20,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   imports: [
     CommonModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
   ],
   providers: [
