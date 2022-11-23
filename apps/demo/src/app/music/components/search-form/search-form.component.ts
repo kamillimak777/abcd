@@ -6,6 +6,7 @@ import {
   FormGroup,
   NonNullableFormBuilder,
   UntypedFormBuilder,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import {
@@ -33,9 +34,25 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 export class SearchFormComponent {
   @Output() search = new EventEmitter<string>();
 
+  censor = (control: AbstractControl<string>): ValidationErrors | null => {
+    const badword = 'batman';
+    if (!control.value.includes(badword)) return null;
+
+    return {
+      censor: { badword },
+    };
+  };
+
   searchForm = this.fb.group({
     // query: this.fb.control('Batman')
-    query: ['', [Validators.required, Validators.minLength(3)]],
+    query: this.fb.control('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        this.censor, //
+      ],
+    }),
+
     type: ['album'],
   });
 

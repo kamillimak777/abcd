@@ -11,6 +11,9 @@
         <mat-error *ngIf="queryField.getError('minlength') as error">
           Minimum length is {{ error.requiredLength }}
         </mat-error>
+        <mat-error *ngIf="queryField.getError('censor') as error">
+          Cannot include "{{ error.badword }}"
+        </mat-error>
       </mat-form-field>
       
       <button type="submit" mat-fab style="margin: 25px 0 0 -56px">
@@ -21,6 +24,7 @@
 </form>
 
 <!-- <ng-container *ngIf="queryField.dirty || queryField.touched"> -->
+
 <!-- <mat-hint *ngIf="searchForm.get('query')?.getError('minlength'); let error = $implicit "> -->
 <!-- <mat-hint *ngIf="searchForm.get('query')?.getError('minlength'); let error "> -->
 <!-- <mat-hint *ngIf="searchForm.get('query')?.getError('minlength') as error "> -->
