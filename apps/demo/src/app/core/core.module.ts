@@ -10,10 +10,17 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { AuthConfig } from 'angular-oauth2-oidc';
 import { authConfig } from './authConfig';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from '../reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument(),
+  ],
   providers: [
     // { provide: HttpClient, useClass: MyMuchBetterHttpClient },
     {

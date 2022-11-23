@@ -168,3 +168,7 @@ https://docs.sentry.io/platforms/javascript/guides/angular/configuration/integra
 https://github.com/colinhacks/zod 
 
 https://github.com/gvergnaud/ts-pattern
+
+
+## NgRx
+npx nx generate @ngrx/schematics:store core --module=core --project=demo --no-flat --root --stateInterface=AppState
