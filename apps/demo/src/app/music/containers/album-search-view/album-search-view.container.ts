@@ -8,8 +8,11 @@ import {
   filter,
   map,
   mergeMap,
+  Subject,
   Subscription,
   switchMap,
+  takeUntil,
+  takeWhile,
   tap,
 } from 'rxjs';
 import { Album } from '../../../core/model/Album';
@@ -31,23 +34,27 @@ export class AlbumSearchViewContainer {
     private store: MusicStoreService
   ) {
     const queryChanges = this.route.queryParamMap.pipe(
-      map((qpm) => qpm.get('q'))
+      map((qpm) => qpm.get('q')),
+      takeUntil(this.$onDestroy)
     );
 
     const resultsChanges = queryChanges.pipe(
       filter(Boolean),
       switchMap((query) =>
         this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
-      )
+      ),
+      // take(n), takeWhile(fn) , takeUntil(obs)
+      takeUntil(this.$onDestroy)
     );
-    this.sub.add(queryChanges.subscribe((q) => (this.query = q)));
-    this.sub.add(resultsChanges.subscribe((albums) => (this.results = albums)));
+
+    queryChanges.subscribe((q) => (this.query = q));
+    resultsChanges.subscribe((albums) => (this.results = albums));
   }
 
-  sub = new Subscription();
+  $onDestroy = new Subject();
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.$onDestroy.next(null);
   }
 
   search(query = '') {
