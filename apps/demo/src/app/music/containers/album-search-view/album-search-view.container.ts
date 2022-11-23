@@ -24,38 +24,21 @@ import { MusicStoreService } from '../../../core/services/music-store/music-stor
   providers: [],
 })
 export class AlbumSearchViewContainer {
-  results: Album[] = [];
-  query: string | null = '';
-  message = '';
+  queryChanges = this.route.queryParamMap //
+    .pipe(map((qpm) => qpm.get('q')));
+
+  resultsChanges = this.queryChanges.pipe(
+    filter(Boolean),
+    switchMap((query) =>
+      this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
+    )
+  );
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private store: MusicStoreService
-  ) {
-    const queryChanges = this.route.queryParamMap.pipe(
-      map((qpm) => qpm.get('q')),
-      takeUntil(this.$onDestroy)
-    );
-
-    const resultsChanges = queryChanges.pipe(
-      filter(Boolean),
-      switchMap((query) =>
-        this.store.searchAlbums(query).pipe(catchError(() => EMPTY))
-      ),
-      // take(n), takeWhile(fn) , takeUntil(obs)
-      takeUntil(this.$onDestroy)
-    );
-
-    queryChanges.subscribe((q) => (this.query = q));
-    resultsChanges.subscribe((albums) => (this.results = albums));
-  }
-
-  $onDestroy = new Subject();
-
-  ngOnDestroy(): void {
-    this.$onDestroy.next(null);
-  }
+  ) {}
 
   search(query = '') {
     this.router.navigate(['.'], {
