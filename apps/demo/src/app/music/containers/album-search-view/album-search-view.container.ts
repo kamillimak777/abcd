@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, map, tap } from 'rxjs';
+import {
+  concatMap,
+  exhaustMap,
+  filter,
+  map,
+  mergeMap,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { Album } from '../../../core/model/Album';
 import { MusicStoreService } from '../../../core/services/music-store/music-store.service';
 @Component({
@@ -24,13 +32,19 @@ export class AlbumSearchViewContainer {
       .pipe(
         map((qpm) => qpm.get('q')),
         tap((q) => (this.query = q)),
-        filter(Boolean) // typeGuard
+        filter(Boolean),
+        // map(query => this.store.searchAlbums(query)),
+        // (obs) => obs // Observable<Observable<AlbumResponse[]>>
+
+        // mergeMap((query) => this.store.searchAlbums(query)), // subscribe all
+        // concatMap((query) => this.store.searchAlbums(query)), // subscribe one after one
+        // exhaustMap((query) => this.store.searchAlbums(query)), // subscribe first and ingnore // throttle
+        switchMap((query) => this.store.searchAlbums(query)), // subscribe lastone and unsubscribe prev // debounce
+        // (obs) => obs // Observable<AlbumResponse[]>
       )
-      .subscribe((query) => {
-        this.store.searchAlbums(query).subscribe({
-          next: (albums) => (this.results = albums),
-          error: (error) => (this.message = error.message),
-        });
+      .subscribe({
+        next: (albums) => (this.results = albums),
+        error: (error) => (this.message = error.message),
       });
   }
 
