@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import * as fromPlaylists from './store/playlists.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { PlaylistsEffects } from './store/playlists.effects';
+import { PlaylistsContainerViewComponent } from './containers/playlists-container-view/playlists-container-view.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     PlaylistListComponent,
     PlaylistDetailsComponent,
     PlaylistEditorComponent,
+    PlaylistsContainerViewComponent,
   ],
   imports: [
     CommonModule,

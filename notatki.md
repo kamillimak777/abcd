@@ -171,8 +171,13 @@ https://github.com/gvergnaud/ts-pattern
 
 
 ## NgRx
+https://ngrx.io/guide/schematics
+https://www.npmjs.com/package/ngrx-immer
+
 npx nx generate @ngrx/schematics:store core --module=core --project=demo --no-flat --root --stateInterface=AppState
 
 npx nx generate @ngrx/schematics:reducer user-session  --api --no-flat --group --reducers=reducers/index.ts 
 
  npx nx generate @ngrx/schematics:feature playlists --project=demo --module=playlists --api 
+
+npx nx generate @ngrx/schematics:container playlists/containers/playlists-container-view --project=demo  
