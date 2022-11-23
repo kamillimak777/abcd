@@ -14,7 +14,15 @@ import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
-import { debounceTime, distinctUntilChanged, filter, Observable } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  Observable,
+  tap,
+  withLatestFrom,
+} from 'rxjs';
 
 @Component({
   selector: 'app-search-form',
@@ -49,21 +57,21 @@ export class SearchFormComponent {
   ): Observable<ValidationErrors | null> => {
     //
     return new Observable((subscriber) => {
-      console.log('Subscribe ' + control.value);
+      // console.log('Subscribe ' + control.value);
       const result = this.censor(control);
 
       const handle = setTimeout(() => {
-        console.log('Next: ' + control.value);
+        // console.log('Next: ' + control.value);
         subscriber.next(result);
 
-        console.log('Complete');
+        // console.log('Complete');
         subscriber.complete();
         // subscriber.error()
-      }, 2000);
+      }, 1000);
 
       // Destructor:
       return () => {
-        console.log('Unsubscribe');
+        // console.log('Unsubscribe');
         clearTimeout(handle);
       };
     });
@@ -88,26 +96,26 @@ export class SearchFormComponent {
   constructor(private fb: NonNullableFormBuilder) {
     window.form = this.searchForm;
 
-    this.searchForm.controls.query.valueChanges
-      .pipe(
-        // wait for 500ms silence
-        debounceTime(500),
+    const statusChanges = this.searchForm.controls.query.statusChanges; // --V-I-V-->
+    // const validChanges = statusChanges.pipe(filter((s) => s == 'VALID'));
 
-        // no duplicates
-        distinctUntilChanged(),
+    const valueChanges = this.searchForm.controls.query.valueChanges; // -A-B-C->
 
-        // minimum 3 characters
-        filter((x) => x.length >= 3)
-      )
-      .subscribe(this.search);
+    const searchChanges = statusChanges.pipe(
+      withLatestFrom(valueChanges),
+      // tap(([status, query]) => {})
+      filter(([status, query]) => status == 'VALID'),
+      map(([status, query]) => query),
+      tap((x) => {}),
+      // wait for 500ms silence
+      debounceTime(500),
+      // no duplicates
+      distinctUntilChanged(),
+    );
 
-    // .subscribe(console.log);
-    // .subscribe((query) => this.search.emit(query));
-    // .subscribe({
-    //   next: res => this.search.next(res),
-    //   error: res => this.search.error(res),
-    //   complete: () => this.search.complete(),
-    // })
+
+    // searchChanges.subscribe(console.log);
+    searchChanges.subscribe(this.search);
   }
 
   submit() {
